@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CourierrExpress.Controllers
 {
-    [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Route("api/account")]
+    public class AccountController : Controller
     {
         // GET api/values
         [HttpGet]
