@@ -7,7 +7,7 @@ namespace CourierrExpress.Controllers
     [Route("api/Index")]
     public class IndexController : Controller
     {
-        [Authorize]
+        [AllowAnonymous]
         public string Index()
         {
             return "Started!!!";
