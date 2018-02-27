@@ -54,7 +54,18 @@ namespace CourierrExpress
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Index}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "spa-fallabck",
+                    template: "{*url}",
+                    defaults: new { Controller = "Index", action = "Index" }
+                );
+            });
         }
     }
 }
