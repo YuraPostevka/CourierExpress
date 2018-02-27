@@ -1,5 +1,4 @@
 ﻿using CourierExpress.Models;
-using CourierrExpress.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using CourierrExpress.BLL.Services.Interfaces;
 
 namespace CourierrExpress.Controllers
 {
@@ -16,9 +16,12 @@ namespace CourierrExpress.Controllers
     {
         private readonly IConfiguration _config;
 
-        public TokenController(IConfiguration config)
+        private readonly IUserService _userService;
+
+        public TokenController(IConfiguration config, IUserService userService)
         {
             _config = config;
+            _userService = userService;
         }
 
         [AllowAnonymous]
@@ -52,6 +55,8 @@ namespace CourierrExpress.Controllers
         private static UserModel Authenticate(LoginModel login)
         {
             UserModel user = null;
+
+            //var existingUser = _userService.Get();
 
             if (login.Username == "username" && login.Password == "password")
             {
