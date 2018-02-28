@@ -1,0 +1,3 @@
+rootProject.name = 'CourierExpress'
+
+include ':app'
