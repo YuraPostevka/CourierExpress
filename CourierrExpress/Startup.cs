@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using CourierrExpress.BLL.Services.Implementations;
+using CourierrExpress.BLL.Services.Interfaces;
 using DotNetify;
 
 namespace CourierrExpress
@@ -23,9 +25,7 @@ namespace CourierrExpress
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMemoryCache();
-            services.AddSignalR();
-            services.AddDotNetify();
+            services.AddCors();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -46,14 +46,13 @@ namespace CourierrExpress
                 options.UseSqlServer(Configuration.GetConnectionString("CourierExpressConnection")));
 
             services.AddMvc();
+
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseWebSockets();
-            app.UseSignalR(routes => routes.MapDotNetifyHub());
-            app.UseDotNetify();
 
             if (env.IsDevelopment())
             {

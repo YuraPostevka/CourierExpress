@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   Platform,
@@ -12,16 +6,34 @@ import {
   View
 } from 'react-native';
 
-import Login from "./src/Login/Login";
+import Login from "./components/Login/Login";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoggedIn: false,
+    }
+
+  }
+
+  onLogIn() {
+    this.setState({
+      isLoggedIn: true,
+    });
+  }
+
+  onLogOut() {
+    this.setState({
+      isLoggedIn: false,
+    });
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Login
-          onLoginPress={() => this.setState({ isLoggedIn: true })}
-        />
+        <Login />
       </View>
     );
   }
@@ -29,9 +41,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 2,
     justifyContent: 'center',
-    marginTop: 50,
-    padding: 20,
-    backgroundColor: '#ffffff',
   }
 });
