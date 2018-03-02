@@ -35,7 +35,7 @@ export const Root = StackNavigator({
         screen: Register,
     }
 }, {
-        initialRouteName: 'Login',
+        initialRouteName: 'Register',
         mode: 'modal',
         headerMode: 'none',
     });

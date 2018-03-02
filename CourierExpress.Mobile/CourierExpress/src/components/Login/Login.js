@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-// create a component
+import LoginForm from "./LoginForm";
+
 export default class Login extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={styles.title}>
-                    Courier Express
-            </Text>
-            </View>
+            <View style={styles.container}>
+                <View style={styles.formContainer}>
+                    <LoginForm />
+                </View>
+            </View >
         );
     }
 }
@@ -20,18 +26,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2c3e50',
     },
-    loginContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
     title: {
+        flex: 1,
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 120,
-        textAlign: 'center',
-        opacity: 0.9,
-        fontSize: 40
+        fontSize: 30
+    },
+    formContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 10
     }
 });
-
-//make this component available to the app

@@ -15,7 +15,8 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
+    alignItems: "center"
   }
 });

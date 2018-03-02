@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-// create a component
+import RegisterForm from "./RegisterForm";
+
 export default class Register extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={styles.title}>
-                    Register
-                    </Text>
-            </View>
+            <View style={styles.container}>
+                <View style={styles.formContainer}>
+                    <RegisterForm />
+                </View>
+            </View >
         );
     }
 }
 
 // define your styles
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#2c3e50',
+    },
     title: {
+        flex: 1,
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 120,
-        textAlign: 'center',
-        opacity: 0.9,
-        fontSize: 40
+        fontSize: 30
+    },
+    formContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        padding: 10
     }
 });
-
-//make this component available to the app
