@@ -1,18 +1,34 @@
 ﻿using CourierExpress.Models;
-using CourierrExpress.BLL.Services.Interfaces;
+using CourierExpress.BLL.Services.Interfaces;
+using CourierExpress.DAL;
+using System.Linq;
 
-namespace CourierrExpress.BLL.Services.Implementations
+namespace CourierExpress.BLL.Services.Implementations
 {
     public class UserService : IUserService
     {
-        public void Add(LoginModel model)
+        private readonly ApplicationDbContext _context;
+
+        public UserService(ApplicationDbContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
         }
 
-        public LoginModel Get(string userName, string password)
+        public void Add(LoginModel model)
         {
-            throw new System.NotImplementedException();
+            if (model.PhoneNumber == null || model.Password == null) return;
+            _context.Users.Add(new UserModel
+            {
+                PhoneNumber = model.PhoneNumber,
+                Password = model.Password
+            });
+            _context.SaveChanges();
+        }
+
+
+        public UserModel Get(string phoneNumber, string password)
+        {
+            return _context.Users.FirstOrDefault(x => x.PhoneNumber == phoneNumber && x.Password == password);
         }
     }
 }

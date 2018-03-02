@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using CourierExpress.Models;
+﻿using CourierExpress.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CourierrExpress.Controllers
+namespace CourierExpress.Controllers
 {
     [Route("api/account")]
     public class AccountController : Controller
     {
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult Post([FromBody]UserModel model)
+        [Route("register")]
+        public IActionResult Register([FromBody]UserModel model)
         {
             //todo:save user
             return Ok();

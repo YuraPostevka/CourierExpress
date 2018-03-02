@@ -1,4 +1,4 @@
-﻿using CourierrExpress.DAL;
+﻿using CourierExpress.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,11 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using CourierrExpress.BLL.Services.Implementations;
-using CourierrExpress.BLL.Services.Interfaces;
+using CourierExpress.BLL.Services.Implementations;
+using CourierExpress.BLL.Services.Interfaces;
 using DotNetify;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
-namespace CourierrExpress
+namespace CourierExpress
 {
     public class Startup
     {
@@ -26,6 +28,12 @@ namespace CourierrExpress
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

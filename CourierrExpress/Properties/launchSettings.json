@@ -16,7 +16,7 @@
             "ASPNETCORE_ENVIRONMENT": "Development"
         }
     },
-    "CourierrExpress": {
+    "CourierExpress": {
         "commandName": "Project",
         "launchBrowser": true,
         "launchUrl": "api/index",

@@ -1,11 +1,11 @@
 ﻿using CourierExpress.Models;
 
-namespace CourierrExpress.BLL.Services.Interfaces
+namespace CourierExpress.BLL.Services.Interfaces
 {
     public interface IUserService
     {
         void Add(LoginModel model);
 
-        LoginModel Get(string userName, string password);
+        UserModel Get(string phoneNumber, string password);
     }
 }

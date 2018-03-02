@@ -1,7 +1,7 @@
 ﻿using CourierExpress.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourierrExpress.DAL
+namespace CourierExpress.DAL
 {
     public class ApplicationDbContext : DbContext
     {

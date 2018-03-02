@@ -21,8 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CourierExpress.Models\CourierExpress.Models.csproj" />
-    <ProjectReference Include="..\CourierrExpress.BLL\CourierrExpress.BLL.csproj" />
-    <ProjectReference Include="..\CourierrExpress.DAL\CourierrExpress.DAL.csproj" />
+    <ProjectReference Include="..\CourierrExpress.BLL\CourierExpress.BLL.csproj" />
+    <ProjectReference Include="..\CourierrExpress.DAL\CourierExpress.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,9 +6,9 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using CourierrExpress.BLL.Services.Interfaces;
+using CourierExpress.BLL.Services.Interfaces;
 
-namespace CourierrExpress.Controllers
+namespace CourierExpress.Controllers
 {
     [Produces("application/json")]
     [Route("api/Token")]
@@ -52,18 +52,11 @@ namespace CourierrExpress.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private static UserModel Authenticate(LoginModel login)
+        private UserModel Authenticate(LoginModel login)
         {
-            UserModel user = null;
+            var existingUser = _userService.Get(login.PhoneNumber, login.Password);
 
-            //var existingUser = _userService.Get();
-
-            if (login.Username == "username" && login.Password == "password")
-            {
-                user = new UserModel { Name = "username", Email = "password@password.com" };
-            }
-
-            return user;
+            return existingUser;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CourierExpress.Models.Constants;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using CourierExpress.Models.Constants;
 
 namespace CourierExpress.Models
 {
@@ -12,8 +13,14 @@ namespace CourierExpress.Models
 
         public int Price { get; set; }
 
+        public int CostumerId { get; set; }
+
+        public int? CourierId { get; set; }
+
+        [NotMapped]
         public UserModel Customer { get; set; }
 
+        [NotMapped]
         public UserModel Courier { get; set; }
 
         public LocationModel Location { get; set; }

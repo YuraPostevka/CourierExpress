@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourierrExpress", "CourierrExpress\CourierrExpress.csproj", "{4A8D3283-B4D5-431B-9F4F-AA0D92175804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourierExpress", "CourierExpress\CourierExpress.csproj", "{4A8D3283-B4D5-431B-9F4F-AA0D92175804}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierExpress.Models", "CourierExpress.Models\CourierExpress.Models.csproj", "{2B4DB693-0111-4A78-9846-E7AB27D2484B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourierExpress.Models", "CourierExpress.Models\CourierExpress.Models.csproj", "{2B4DB693-0111-4A78-9846-E7AB27D2484B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierrExpress.DAL", "CourierrExpress.DAL\CourierrExpress.DAL.csproj", "{B2A962A7-1328-4170-BD95-15A20B108754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourierExpress.DAL", "CourierExpress.DAL\CourierExpress.DAL.csproj", "{B2A962A7-1328-4170-BD95-15A20B108754}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourierrExpress.BLL", "CourierrExpress.BLL\CourierrExpress.BLL.csproj", "{6D43EFED-D56E-4872-9B2A-E68564BD2BA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourierExpress.BLL", "CourierExpress.BLL\CourierExpress.BLL.csproj", "{6D43EFED-D56E-4872-9B2A-E68564BD2BA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
