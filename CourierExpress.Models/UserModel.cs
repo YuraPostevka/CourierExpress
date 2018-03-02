@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CourierExpress.Models
 {
@@ -13,8 +14,7 @@ namespace CourierExpress.Models
 
         public string Password { get; set; }
 
-        public DateTime Birthdate { get; set; }
-
+        [NotMapped]
         public virtual List<OrderModel> Orders { get; set; }
     }
 }

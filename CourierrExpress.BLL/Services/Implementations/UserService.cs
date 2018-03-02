@@ -14,14 +14,10 @@ namespace CourierExpress.BLL.Services.Implementations
             _context = context;
         }
 
-        public void Add(LoginModel model)
+        public void Add(UserModel model)
         {
             if (model.PhoneNumber == null || model.Password == null) return;
-            _context.Users.Add(new UserModel
-            {
-                PhoneNumber = model.PhoneNumber,
-                Password = model.Password
-            });
+            _context.Users.Add(model);
             _context.SaveChanges();
         }
 
