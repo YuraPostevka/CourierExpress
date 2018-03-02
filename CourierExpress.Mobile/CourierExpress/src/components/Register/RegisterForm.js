@@ -7,14 +7,41 @@ export default class RegisterForm extends Component {
         super(props);
         this.state = {
             number: "",
-            passwrod: "",
+            password: "",
             name: ""
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
+
     onSubmit() {
-        Alert.alert("pressed");
+        fetch("http://courierexpressapp.azurewebsites.net/api/account/register",
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    phoneNumber: this.state.number,
+                    password: this.state.password,
+                }),
+            },
+        )
+            .then((response) => response)
+            .then(() => {
+                this.setState({
+                    number: "",
+                    password: "",
+                    name: ""
+                });
+                this.props.navigate("Login");
+            })
+            .catch((error) => {
+                Alert.alert("Something wrong!!!");
+                return Promise(error);
+            });
     }
 
     render() {
@@ -48,15 +75,15 @@ export default class RegisterForm extends Component {
                     placeholder='Password'
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     secureTextEntry
-                    onChangeText={(passwrod) => this.setState({ passwrod })}
-                    value={this.state.passwrod}
+                    onChangeText={(password) => this.setState({ password })}
+                    value={this.state.password}
                 />
 
                 <Button
                     onPress={this.onSubmit}
                     title="Register"
                     color="#2980b6"
-                    disabled={this.state.number === "" || this.state.passwrod === "" || this.state.name === ""}
+                    disabled={this.state.number === "" || this.state.password === "" || this.state.name === ""}
                 />
             </View>
         );

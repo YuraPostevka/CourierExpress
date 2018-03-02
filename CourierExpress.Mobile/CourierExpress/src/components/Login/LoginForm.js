@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 
 // create a component
 export default class LoginForm extends Component {
@@ -7,13 +7,39 @@ export default class LoginForm extends Component {
         super(props);
         this.state = {
             number: "",
-            passwrod: ""
+            password: "",
+            token: ""
         };
 
         this.onSubmit = this.onSubmit.bind(this);
     }
     onSubmit() {
-        this.props.navigation.navigate("Register");
+        // this.props.navigate("Register");
+        fetch("http://courierexpressapp.azurewebsites.net/api/token",
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    phoneNumber: this.state.number,
+                    password: this.state.password,
+                }),
+            },
+        )
+            .then((response) => response.json())
+            .then((resp) => {
+                this.setState({
+                    number: "",
+                    password: "",
+                    token: resp.token
+                });
+            })
+            .catch((error) => {
+                Alert.alert("Something wrong!!!");
+                return Promise(error);
+            });
     }
 
     render() {
@@ -21,25 +47,32 @@ export default class LoginForm extends Component {
             <View>
                 <TextInput style={styles.input}
                     autoCapitalize="none"
-                    onSubmitEditing={() => this.passwordInput.focus()}
                     autoCorrect={false}
                     keyboardType='phone-pad'
                     returnKeyType="next"
                     placeholder='Mobile Num'
                     maxLength={12}
-                    placeholderTextColor='rgba(225,225,225,0.7)' />
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(number) => this.setState({ number })}
+                    value={this.state.number}
+                />
 
                 <TextInput style={styles.input}
                     returnKeyType="go"
-                    ref={(input) => this.passwordInput = input}
                     placeholder='Password'
                     placeholderTextColor='rgba(225,225,225,0.7)'
-                    secureTextEntry />
+                    secureTextEntry
+                    onChangeText={(password) => this.setState({ password })}
+                    value={this.state.password}
+                />
 
-                <TouchableOpacity style={styles.buttonContainer}
-                    onPress={() => { }}>
-                    <Text style={styles.buttonText}>LOGIN</Text>
-                </TouchableOpacity>
+                <Button
+                    onPress={this.onSubmit}
+                    title="Login"
+                    color="#2980b6"
+                    disabled={this.state.number === "" || this.state.passwrod === ""}
+                />
+                <Text>{this.state.token}</Text>
             </View>
         );
     }

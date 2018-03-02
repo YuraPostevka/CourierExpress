@@ -5,37 +5,27 @@ import Icon from "../../node_modules/react-native-vector-icons/Octicons";
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 
+
 export const Tabs = TabNavigator({
     Login: {
         screen: Login,
         navigationOptions: {
-            tabBarIcon: ({ tintColor }) => <Icon name="sign-in" size={20} color={tintColor} />
+            title: 'Log in',
         },
     },
     Register: {
-        screen: Register
-    }
-},
-    {
-        tabBarPosition: "top",
-        tabBarOptions: {
-            showIcon: true,
-            showLabel: true,
-        }
+        screen: Register,
+    },
+}, {
+        initialRouteName: "Login",
     });
 
 export const Root = StackNavigator({
     Tabs: {
         screen: Tabs,
     },
-    Login: {
-        screen: Login,
-    },
-    Register: {
-        screen: Register,
-    }
 }, {
-        initialRouteName: 'Register',
         mode: 'modal',
         headerMode: 'none',
+        initialRouteName: "Tabs",
     });

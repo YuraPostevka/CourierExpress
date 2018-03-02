@@ -4,16 +4,21 @@ import { View, Text, StyleSheet } from 'react-native';
 import LoginForm from "./LoginForm";
 
 export default class Login extends Component {
+    static navigationOptions = {
+        title: 'Login'
+    };
 
     constructor(props) {
         super(props);
     }
 
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <LoginForm />
+                    <LoginForm
+                        navigate={navigate} />
                 </View>
             </View >
         );
