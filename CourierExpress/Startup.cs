@@ -9,7 +9,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using CourierExpress.BLL.Services.Implementations;
 using CourierExpress.BLL.Services.Interfaces;
-using DotNetify;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
