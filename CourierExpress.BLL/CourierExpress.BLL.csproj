@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CourierExpress.DAL\CourierExpress.DAL.csproj" />
     <ProjectReference Include="..\CourierExpress.Models\CourierExpress.Models.csproj" />
-    <ProjectReference Include="..\CourierrExpress.DAL\CourierExpress.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
