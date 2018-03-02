@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, KeyboardAvoidingView } from 'react-native';
 
 // create a component
-export default class Login extends Component {
+export default class Register extends Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={styles.title}>
-                    Courier Express
-            </Text>
+                    Register
+                    </Text>
             </View>
         );
     }
@@ -16,15 +16,6 @@ export default class Login extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#2c3e50',
-    },
-    loginContainer: {
-        alignItems: 'center',
-        flexGrow: 1,
-        justifyContent: 'center'
-    },
     title: {
         justifyContent: 'center',
         marginTop: 120,

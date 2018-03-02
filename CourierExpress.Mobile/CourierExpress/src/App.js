@@ -1,41 +1,15 @@
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import Login from "./components/Login/Login";
+import { Root, Tabs } from "./config/router";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoggedIn: false,
-    }
-
-  }
-
-  onLogIn() {
-    this.setState({
-      isLoggedIn: true,
-    });
-  }
-
-  onLogOut() {
-    this.setState({
-      isLoggedIn: false,
-    });
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Login />
-      </View>
-    );
+    return <Root />;
   }
 }
 
