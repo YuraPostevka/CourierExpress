@@ -18,6 +18,11 @@ export const Tabs = TabNavigator({
     },
 }, {
         initialRouteName: "Login",
+        tabBarOptions: {
+            tabStyle: {
+                backgroundColor: "#2c3e50",
+            },
+        }
     });
 
 export const Root = StackNavigator({
