@@ -28,15 +28,11 @@ namespace CourierExpress.Controllers
         [HttpPost]
         public IActionResult CreateToken([FromBody]LoginModel login)
         {
-            IActionResult response = Unauthorized();
             var user = Authenticate(login);
-
-            if (user == null) return response;
+            if (user == null) return BadRequest(new { error = "UnAuthorized" });
 
             var tokenString = BuildToken(user);
-            response = Ok(new { token = tokenString });
-
-            return response;
+            return Ok(new { token = tokenString });
         }
 
         private string BuildToken(UserModel user)

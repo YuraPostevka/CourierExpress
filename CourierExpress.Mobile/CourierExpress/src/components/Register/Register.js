@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 import RegisterForm from "./RegisterForm";
 
@@ -19,6 +19,14 @@ export default class Register extends Component {
                 <View style={styles.formContainer}>
                     <RegisterForm
                         navigate={navigate} />
+
+                    <TouchableOpacity
+                        style={styles.redirectButton}
+                        onPress={() => navigate("Login")}
+                    >
+                        <Text style={styles.redirectButtonText}>
+                            Alerady have an account </Text>
+                    </TouchableOpacity>
                 </View>
             </View >
         );
@@ -41,5 +49,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 10
+    },
+    redirectButton: {
+        alignItems: 'center',
+        paddingTop: 10,
+    },
+    redirectButtonText: {
+        color: "#fff"
     }
 });

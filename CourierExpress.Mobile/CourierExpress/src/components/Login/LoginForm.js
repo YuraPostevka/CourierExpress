@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, Keyboard } from 'react-native';
 
 // create a component
 export default class LoginForm extends Component {
@@ -14,7 +14,7 @@ export default class LoginForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     onSubmit() {
-        // this.props.navigate("Register");
+        Keyboard.dismiss();
         fetch("http://courierexpressapp.azurewebsites.net/api/token",
             {
                 method: 'POST',
@@ -30,11 +30,13 @@ export default class LoginForm extends Component {
         )
             .then((response) => response.json())
             .then((resp) => {
-                this.setState({
-                    number: "",
-                    password: "",
-                    token: resp.token
-                });
+                // this.setState({
+                //     number: "",
+                //     password: "",
+                // });
+                Alert.alert("Something wrong!!!");
+                // this.props.navigate("Overview");
+
             })
             .catch((error) => {
                 Alert.alert("Something wrong!!!");
@@ -70,9 +72,8 @@ export default class LoginForm extends Component {
                     onPress={this.onSubmit}
                     title="Login"
                     color="#2980b6"
-                    disabled={this.state.number === "" || this.state.passwrod === ""}
+                    disabled={this.state.number === "" || this.state.password === ""}
                 />
-                <Text>{this.state.token}</Text>
             </View>
         );
     }

@@ -51,7 +51,7 @@ export default class RegisterForm extends Component {
                     autoCapitalize="none"
                     autoCorrect={false}
                     returnKeyType="next"
-                    placeholder='Name'
+                    placeholder='Pick a username'
                     maxLength={12}
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     onChangeText={(name) => this.setState({ name })}
@@ -63,7 +63,7 @@ export default class RegisterForm extends Component {
                     autoCorrect={false}
                     keyboardType='phone-pad'
                     returnKeyType="next"
-                    placeholder='Mobile Num'
+                    placeholder='+380 00 00 000'
                     maxLength={12}
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     onChangeText={(number) => this.setState({ number })}
@@ -72,7 +72,7 @@ export default class RegisterForm extends Component {
 
                 <TextInput style={styles.input}
                     returnKeyType="go"
-                    placeholder='Password'
+                    placeholder='Create a password'
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     secureTextEntry
                     onChangeText={(password) => this.setState({ password })}
