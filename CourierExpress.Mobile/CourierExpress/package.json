@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --port 8088",
+    "build-dev": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "react-devtools": "react-devtools",
+    "run": "react-native run-android",
     "test": "jest"
   },
   "dependencies": {
@@ -13,7 +16,8 @@
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "1.2.1",
     "react-redux": "5.0.7",
-    "react-thunk": "1.0.0"
+    "react-thunk": "1.0.0",
+    "react-native-axios": "0.17.1"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",

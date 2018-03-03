@@ -4,9 +4,10 @@ import Icon from "../../node_modules/react-native-vector-icons/Octicons";
 
 import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
-import Overview from "../components/Overview/Overview";
+import Main from "../components/Main/Main";
+import CreateOrder from "../components/Main/CreateOrder";
 
-export const Tabs = TabNavigator({
+export const AuthStack = TabNavigator({
     Login: {
         screen: Login,
         navigationOptions: {
@@ -26,15 +27,32 @@ export const Tabs = TabNavigator({
         lazy: false,
     });
 
+export const MainStack = TabNavigator({
+    Main: {
+        screen: Main
+    }
+}, {
+        initialRouteName: "Main",
+        tabBarOptions: {
+            tabStyle: {
+                backgroundColor: "#2c3e50",
+            },
+        },
+        lazy: false,
+    });
+
 export const Root = StackNavigator({
-    Tabs: {
-        screen: Tabs,
+    AuthStack: {
+        screen: AuthStack,
     },
-    Overview: {
-        screen: Overview
+    MainStack: {
+        screen: MainStack
+    },
+    CreateOrder: {
+        screen: CreateOrder
     }
 }, {
         mode: 'modal',
         headerMode: 'none',
-        initialRouteName: "Tabs",
+        initialRouteName: "MainStack",
     });

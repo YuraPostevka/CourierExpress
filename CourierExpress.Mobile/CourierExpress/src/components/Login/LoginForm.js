@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Keyboard } from 'react-native';
+import {
+    View, Text, TextInput, StyleSheet, Button, Keyboard,
+    Alert, AsyncStorage
+} from 'react-native';
+
+import axios from "react-native-axios";
 
 // create a component
 export default class LoginForm extends Component {
@@ -8,7 +13,6 @@ export default class LoginForm extends Component {
         this.state = {
             number: "",
             password: "",
-            token: ""
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -28,14 +32,19 @@ export default class LoginForm extends Component {
                 }),
             },
         )
-            .then((response) => response.json())
-            .then((resp) => {
-                // this.setState({
-                //     number: "",
-                //     password: "",
-                // });
-                Alert.alert("Something wrong!!!");
-                // this.props.navigate("Overview");
+            .then(response => response.json())
+            .then(resp => {
+                if (resp.error) {
+                    Alert.alert(resp.error);
+                }
+                else {
+                    AsyncStorage.setItem('token', resp.token);
+                    this.setState({
+                        number: "",
+                        password: "",
+                    });
+                    this.props.navigate("Overview");
+                }
 
             })
             .catch((error) => {
