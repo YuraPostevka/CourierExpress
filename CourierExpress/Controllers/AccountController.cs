@@ -53,7 +53,12 @@ namespace CourierExpress.Controllers
 
             var e = HttpContext.User;
             var tokenString = BuildToken(user);
-            return Ok(new { token = tokenString });
+            return Ok(new
+            {
+                token = tokenString,
+                userName = user.Name,
+                id = user.Id
+            });
         }
 
         private string BuildToken(ApplicationUserModel user)
