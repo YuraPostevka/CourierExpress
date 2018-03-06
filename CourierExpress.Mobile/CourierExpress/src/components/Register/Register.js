@@ -5,7 +5,7 @@ import RegisterForm from "./RegisterForm";
 
 export default class Register extends Component {
     static navigationOptions = {
-        title: 'Register'
+        title: 'Register',
     };
 
     constructor(props) {
@@ -25,7 +25,8 @@ export default class Register extends Component {
                         onPress={() => navigate("Login")}
                     >
                         <Text style={styles.redirectButtonText}>
-                            Alerady have an account </Text>
+                            Alerady have an account
+                             </Text>
                     </TouchableOpacity>
                 </View>
             </View >

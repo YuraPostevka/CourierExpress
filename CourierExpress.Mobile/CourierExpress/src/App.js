@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import store from "./store";
 import { StyleSheet } from 'react-native';
 
 import { Root } from "./config/router";
@@ -11,7 +13,11 @@ export default class App extends Component {
   componentDidMount() {
   }
   render() {
-    return <Root />;
+    return (
+      <Provider store={store}>
+        <Root />
+      </Provider>
+    )
   }
 }
 

@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, AsyncStorage, Button, TouchableOpacity,
-    ScrollView
+    ScrollView, BackHandler, Alert
 } from 'react-native';
 
-export default class Main extends Component {
+export default class AllOrders extends Component {
     static navigationOptions = {
-        title: 'My orders',
+        title: 'All orders',
+        swipeEnabled : false
     };
 
     constructor(props) {
         super(props);
         this.state = {
         };
+    }
+
+    componentDidMount() {
+    }
+
+    componentWillUnmount() {
+
     }
 
     render() {
@@ -22,14 +30,6 @@ export default class Main extends Component {
                 <ScrollView>
                     <Text>Content</Text>
                 </ScrollView>
-
-                <View style={{ position: 'absolute', left: 0, right: 0, bottom: 2 }}>
-                    <Button
-                        onPress={() => navigate("CreateOrder")}
-                        title="Create order"
-                        color="#2980b6"
-                    />
-                </View>
             </View>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
 
 import LoginForm from "./LoginForm";
 
@@ -12,6 +12,16 @@ export default class Login extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            BackHandler.exitApp();
+        });
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress");
+    }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -19,6 +29,15 @@ export default class Login extends Component {
                 <View style={styles.formContainer}>
                     <LoginForm
                         navigate={navigate} />
+
+                    <TouchableOpacity
+                        style={styles.redirectButton}
+                        onPress={() => navigate("Register")}
+                    >
+                        <Text style={styles.redirectButtonText}>
+                            Register
+                             </Text>
+                    </TouchableOpacity>
                 </View>
             </View >
         );
@@ -41,5 +60,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 10
+    },
+    redirectButton: {
+        alignItems: 'center',
+        paddingTop: 10,
+    },
+    redirectButtonText: {
+        color: "#fff"
     }
 });

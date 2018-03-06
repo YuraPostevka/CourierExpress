@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using CourierExpress.Models.Constants;
 
-namespace CourierExpress.Models
+namespace CourierExpress.Models.Data
 {
     public class OrderModel
     {
@@ -16,6 +16,8 @@ namespace CourierExpress.Models
         public int CostumerId { get; set; }
 
         public int? CourierId { get; set; }
+
+        public string Place { get; set; }
 
         [NotMapped]
         public UserModel Customer { get; set; }

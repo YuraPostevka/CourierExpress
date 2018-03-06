@@ -11,7 +11,30 @@ export default class CreateOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            latitude: null,
+            longitude: null,
+            error: null,
         };
+
+        this.onGetCurrentPosition = this.onGetCurrentPosition.bind(this);
+    }
+
+    onGetCurrentPosition() {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+            },
+            (error) => this.setState({ error: error.message }),
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maxAge: 0
+            }
+        );
     }
 
     render() {
@@ -19,7 +42,7 @@ export default class CreateOrder extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.title}>
-                    <Text style={{ fontSize: 30 }}>
+                    <Text style={{ fontSize: 30, color: "#fff" }}>
                         Create new order
                     </Text>
                 </View>
@@ -55,9 +78,16 @@ export default class CreateOrder extends Component {
                         onChangeText={(password) => this.setState({ password })}
                         value={this.state.password}
                     />
-
-
-
+                    <Button
+                        onPress={this.onGetCurrentPosition}
+                        title="Get current location"
+                        color="#2980b6"
+                    />
+                    <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>Latitude: {this.state.latitude}</Text>
+                        <Text>Longitude: {this.state.longitude}</Text>
+                        {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
+                    </View>
                 </ ScrollView>
                 <Button
                     onPress={this.onSubmit}

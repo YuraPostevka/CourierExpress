@@ -43,7 +43,7 @@ export default class LoginForm extends Component {
                         number: "",
                         password: "",
                     });
-                    this.props.navigate("Overview");
+                    this.props.navigate("Main");
                 }
 
             })

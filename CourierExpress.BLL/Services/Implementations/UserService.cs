@@ -2,6 +2,7 @@
 using CourierExpress.BLL.Services.Interfaces;
 using CourierExpress.DAL;
 using System.Linq;
+using CourierExpress.Models.Security;
 
 namespace CourierExpress.BLL.Services.Implementations
 {
@@ -14,15 +15,15 @@ namespace CourierExpress.BLL.Services.Implementations
             _context = context;
         }
 
-        public void Add(UserModel model)
+        public void Add(ApplicationUserModel model)
         {
-            if (model.PhoneNumber == null || model.Password == null) return;
-            _context.Users.Add(model);
-            _context.SaveChanges();
+            //if (model.PhoneNumber == null || model.Password == null) return;
+            //_context.Users.Add(model);
+            //_context.SaveChanges();
         }
 
 
-        public UserModel Get(string phoneNumber, string password)
+        public ApplicationUserModel Get(string phoneNumber, string password)
         {
             return _context.Users.FirstOrDefault(x => x.PhoneNumber == phoneNumber && x.Password == password);
         }
