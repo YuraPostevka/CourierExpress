@@ -3,14 +3,11 @@ import { Provider } from 'react-redux';
 import store from "./store";
 import { StyleSheet } from 'react-native';
 
-import { Root } from "./config/router";
+import Root from "./screens/Root";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-
-  }
-  componentDidMount() {
   }
   render() {
     return (

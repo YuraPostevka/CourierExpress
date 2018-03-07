@@ -22,9 +22,11 @@ export class LoginForm extends Component {
 
     onSubmit() {
         Keyboard.dismiss();
-
+        this.setState({
+            number: "",
+            password: "",
+        });
         this.props.login(this.state.number, this.state.password);
-        this.props.navigate("MyOrders");
     }
 
     render() {
@@ -67,7 +69,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    account: state.account
+    state
 });
 
 

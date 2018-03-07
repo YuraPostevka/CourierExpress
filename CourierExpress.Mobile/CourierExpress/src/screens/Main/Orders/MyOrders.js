@@ -7,11 +7,6 @@ import {
 import { connect } from "react-redux";
 
 export class MyOrders extends Component {
-    static navigationOptions = {
-        title: 'My orders',
-        swipeEnabled: false
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -37,20 +32,12 @@ export class MyOrders extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
-                    <Text>Content</Text>
-
+                    <View style={styles.title}>
+                        <Text style={{ fontSize: 30, color: "#fff" }}>
+                            My orders
+                </Text>
+                    </View>
                 </ScrollView>
-
-                <View style={{ position: 'absolute', left: 0, right: 0, bottom: 2 }}>
-                    <Button
-                        onPress={() => {
-                            navigate("CreateOrder");
-                        }
-                        }
-                        title="Create order"
-                        color="#2980b6"
-                    />
-                </View>
             </View>
         );
     }
@@ -68,8 +55,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2c3e50',
     },
-    createOrder: {
-        flexGrow: 1,
-        bottom: 0
-    }
+    title: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });

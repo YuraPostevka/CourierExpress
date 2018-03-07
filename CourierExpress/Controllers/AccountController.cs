@@ -51,7 +51,6 @@ namespace CourierExpress.Controllers
                 return BadRequest(new { error = 401, message = "Unauthorized" });
             }
 
-            var e = HttpContext.User;
             var tokenString = BuildToken(user);
             return Ok(new
             {

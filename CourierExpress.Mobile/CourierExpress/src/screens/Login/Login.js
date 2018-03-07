@@ -40,7 +40,7 @@ export default class Login extends Component {
                              </Text>
                     </TouchableOpacity>
                 </View>
-            </View >
+            </View>
         );
     }
 }

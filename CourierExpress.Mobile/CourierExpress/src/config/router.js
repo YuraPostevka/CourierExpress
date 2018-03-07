@@ -1,36 +1,17 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from "react-navigation";
-import Icon from "../../node_modules/react-native-vector-icons/Octicons";
+import IconIonicons from "../../node_modules/react-native-vector-icons/Ionicons";
 
-import Login from "../components/Login/Login";
-import Register from "../components/Register/Register";
-import MyOrders from "../components/Main/MyOrders";
-import AllOrders from "../components/Main/AllOrders";
-import CreateOrder from "../components/Main/CreateOrder";
+import Login from "../screens/Login/Login";
+import Register from "../screens/Register/Register";
 
-// export const AuthStack = TabNavigator({
-// });
+import Main from "../screens/Main/Main";
+import MyOrders from "../screens/Main/Orders/MyOrders";
+import AllOrders from "../screens/Main/Orders/AllOrders";
+import CreateOrder from "../screens/Main/Orders/CreateOrder";
+import Settings from "../screens/Main/Settings/Settings";
 
-export const MainStack = TabNavigator({
-    MyOrders: {
-        screen: MyOrders
-    },
-    AllOrders: {
-        screen: AllOrders
-    },
-},
-    {
-        lazy: false,
-        tabBarPosition: "bottom",
-        tabBarOptions: {
-            tabStyle: {
-                backgroundColor: "#2c3e50",
-            },
-        },
-    }
-);
-
-export const Root = StackNavigator({
+export const AuthRoot = StackNavigator({
     Login: {
         screen: Login,
         navigationOptions: {
@@ -40,16 +21,77 @@ export const Root = StackNavigator({
     Register: {
         screen: Register,
     },
-
-    Main: {
-        screen: MainStack
-    },
-    CreateOrder: {
-        screen: CreateOrder
+},
+    {
+        upperCaseLabel: false,
+        initialRouteName: "Login",
+        mode: 'modal',
+        headerMode: 'none',
     }
+);
+
+export const MainRoot = StackNavigator({
+    Main: {
+        screen: Main
+    },
 }, {
+
 
         mode: 'modal',
         headerMode: 'none',
-        initialRouteName: "Login",
+        initialRouteName: "Main",
     });
+
+
+export const MainStack = TabNavigator({
+    MyOrders: {
+        screen: MyOrders,
+        title: 'Header title',
+        navigationOptions: {
+            tabBarIcon: () => {
+                return <IconIonicons name="ios-home-outline" size={25} color={"white"} />;
+            }
+        }
+    },
+    AllOrders: {
+        screen: AllOrders,
+        navigationOptions: {
+            tabBarIcon: () => {
+                return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
+            }
+        }
+    },
+    CreateOrder: {
+        screen: CreateOrder,
+        navigationOptions: {
+            tabBarIcon: () => {
+                return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
+            }
+        }
+    },
+    MyOSettingsrders: {
+        screen: Settings,
+        navigationOptions: {
+            tabBarIcon: () => {
+                return <IconIonicons name="ios-settings-outline" size={25} color={"white"} />;
+            }
+        }
+    },
+},
+    {
+        initialRouteName: "MyOrders",
+        lazy: false,
+        tabBarPosition: "bottom",
+        tabBarOptions: {
+            showLabel: false,
+            showIcon: true,
+            tabStyle: {
+                backgroundColor: "#2c3e50",
+            },
+        },
+        tabBarPosition: 'bottom',
+        swipeEnabled: false,
+        lazy: false
+    }
+);
+

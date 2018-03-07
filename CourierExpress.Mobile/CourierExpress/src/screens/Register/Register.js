@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { View, Text, StyleSheet, TouchableOpacity, BackHandler } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
-export default class Login extends Component {
+export default class Register extends Component {
     static navigationOptions = {
-        title: 'Login'
+        title: 'Register',
     };
 
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', () => {
-            BackHandler.exitApp();
-        });
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener("hardwareBackPress");
     }
 
     render() {
@@ -28,15 +17,15 @@ export default class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.formContainer}>
-                    <LoginForm
+                    <RegisterForm
                         navigate={navigate} />
 
                     <TouchableOpacity
                         style={styles.redirectButton}
-                        onPress={() => navigate("Register")}
+                        onPress={() => navigate("Login")}
                     >
                         <Text style={styles.redirectButtonText}>
-                            Register
+                            Alerady have an account
                              </Text>
                     </TouchableOpacity>
                 </View>
