@@ -18,12 +18,24 @@ namespace CourierExpress.Controllers
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("getAll")]
         public IActionResult Get()
         {
-            var userName = User.Identity.Name;
-            var a = HttpContext.User;
-            return Ok(new { code = 200, data = userName });
+            return Json(_orderService.Get());
+        }
+
+        [HttpGet]
+        [Route("getMy/{ownerId}")]
+        public IActionResult GetMy(int ownerId)
+        {
+            return Json(_orderService.GetMy(ownerId));
+        }
+
+        [HttpGet]
+        [Route("getById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Json(_orderService.GetById(id));
         }
 
         [HttpPost]

@@ -9,9 +9,9 @@ namespace CourierExpress.Models.Data
 
         public string Description { get; set; }
 
-        public int Weight { get; set; }
+        public string Weight { get; set; }
 
-        public int Price { get; set; }
+        public string Price { get; set; }
 
         public int OwnerId { get; set; }
 
