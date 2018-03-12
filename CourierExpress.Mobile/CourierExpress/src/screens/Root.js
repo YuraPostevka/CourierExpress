@@ -14,7 +14,7 @@ export class Root extends Component {
     }
 
     render() {
-        if (this.props.account.isLoggedIn) {
+        if (!this.props.account.isLoggedIn) {
             return (
                 <MainRoot />
             );

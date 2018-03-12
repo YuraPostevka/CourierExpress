@@ -46,8 +46,8 @@ export const MainRoot = StackNavigator({
 export const MainStack = TabNavigator({
     MyOrders: {
         screen: MyOrders,
-        title: 'Header title',
         navigationOptions: {
+            tabBarLabel: "My",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-home-outline" size={25} color={"white"} />;
             }
@@ -56,6 +56,7 @@ export const MainStack = TabNavigator({
     AllOrders: {
         screen: AllOrders,
         navigationOptions: {
+            tabBarLabel: "All",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
             }
@@ -64,6 +65,7 @@ export const MainStack = TabNavigator({
     CreateOrder: {
         screen: CreateOrder,
         navigationOptions: {
+            tabBarLabel: "Create",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
             }
@@ -71,7 +73,9 @@ export const MainStack = TabNavigator({
     },
     MyOSettingsrders: {
         screen: Settings,
+
         navigationOptions: {
+            tabBarLabel: "Settings",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-settings-outline" size={25} color={"white"} />;
             }
@@ -80,13 +84,18 @@ export const MainStack = TabNavigator({
 },
     {
         initialRouteName: "MyOrders",
-        lazy: false,
         tabBarPosition: "bottom",
         tabBarOptions: {
-            showLabel: false,
+            showLabel: true,
             showIcon: true,
             tabStyle: {
                 backgroundColor: "#2c3e50",
+            },
+            labelStyle: {
+                fontSize: 11,
+                fontWeight: 'normal',
+                marginBottom: 0,
+                marginTop: 5
             },
         },
         tabBarPosition: 'bottom',

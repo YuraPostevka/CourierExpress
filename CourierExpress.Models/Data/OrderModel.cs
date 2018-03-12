@@ -13,19 +13,19 @@ namespace CourierExpress.Models.Data
 
         public int Price { get; set; }
 
-        public int CostumerId { get; set; }
+        public int OwnerId { get; set; }
 
         public int? CourierId { get; set; }
 
-        public string Place { get; set; }
-
         [NotMapped]
-        public UserModel Customer { get; set; }
+        public UserModel Owner { get; set; }
 
         [NotMapped]
         public UserModel Courier { get; set; }
 
-        public LocationModel Location { get; set; }
+        public string StartPoint { get; set; }
+
+        public string EndPoint { get; set; }
 
         public OrderStatus Status { get; set; }
     }

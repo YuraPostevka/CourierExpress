@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {
-    View, Text, StyleSheet, AsyncStorage, Button, TouchableOpacity,
-    ScrollView, BackHandler, Alert
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import MapView from 'react-native-maps';
+// import Marker from 'react-native-maps';
 
 import { connect } from "react-redux";
 
@@ -10,10 +9,35 @@ export class MyOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            latitude: 0,
+            longitude: 0,
+            error: null,
         };
+
+        this.onGetCurrentPosition = this.onGetCurrentPosition.bind(this);
+    }
+    componentDidMount() {
+        this.onGetCurrentPosition();
     }
 
-    componentDidMount() {
+    onGetCurrentPosition() {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                console.log(position);
+
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+            },
+            (error) => this.setState({ error: error.message }),
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maxAge: 0
+            }
+        );
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,8 +51,6 @@ export class MyOrders extends Component {
     }
 
     render() {
-        const { navigate } = this.props.navigation;
-        const { isLoggedIn } = this.props.account.isLoggedIn;
         return (
             <View style={styles.container}>
                 <ScrollView>
@@ -36,6 +58,26 @@ export class MyOrders extends Component {
                         <Text style={{ fontSize: 30, color: "#fff" }}>
                             My orders
                 </Text>
+                    </View>
+                    <Text>
+                        {this.state.error}
+                    </Text>
+
+                    <View style={styles.mapContainer}>
+                        <MapView
+                            mapType='satellite'
+                            style={styles.map}
+                        >
+                            {this.state.error !== null &&
+                                <MapView.Marker
+                                    coordinate={{
+                                        latitude: this.state.latitude,
+                                        longitude: this.state.longitude,
+                                    }}
+                                    title={"title"}
+                                    description={"de"} />
+                            }
+                        </MapView>
                     </View>
                 </ScrollView>
             </View>
@@ -59,4 +101,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    mapContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    map: {
+        height: 300,
+        width: 300,
+    }
 });

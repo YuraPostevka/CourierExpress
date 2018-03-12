@@ -1,4 +1,5 @@
-﻿using CourierExpress.Models.Security;
+﻿using CourierExpress.Models.Data;
+using CourierExpress.Models.Security;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourierExpress.DAL
@@ -11,6 +12,7 @@ namespace CourierExpress.DAL
         }
 
         public DbSet<ApplicationUserModel> Users { get; set; }
-        //public DbSet<OrderModel> Orders { get; set; }
+
+        public DbSet<OrderModel> Orders { get; set; }
     }
 }
