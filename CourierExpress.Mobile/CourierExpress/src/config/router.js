@@ -100,7 +100,7 @@ export const MainStack = TabNavigator({
         },
         tabBarPosition: 'bottom',
         swipeEnabled: false,
-        lazy: false
+        lazy: true
     }
 );
 
