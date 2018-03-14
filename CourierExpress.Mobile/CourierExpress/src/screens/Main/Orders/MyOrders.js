@@ -23,8 +23,6 @@ export class MyOrders extends Component {
     onGetCurrentPosition() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                console.log(position);
-
                 this.setState({
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
@@ -64,7 +62,7 @@ export class MyOrders extends Component {
                     </Text>
 
                     <View style={styles.mapContainer}>
-                        <MapView
+                        {/* <MapView
                             mapType='satellite'
                             style={styles.map}
                         >
@@ -77,7 +75,7 @@ export class MyOrders extends Component {
                                     title={"title"}
                                     description={"de"} />
                             }
-                        </MapView>
+                        </MapView> */}
                     </View>
                 </ScrollView>
             </View>

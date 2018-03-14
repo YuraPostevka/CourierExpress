@@ -7,7 +7,7 @@ namespace CourierExpress.Controllers
 {
     [Produces("application/json")]
     [Route("api/Orders")]
-    //[Authorize]
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IOrderService _orderService;

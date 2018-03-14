@@ -21,6 +21,10 @@ export const login = (number, password) => {
                     Alert.alert("Incorrect phone number or password!")
                 }
                 else {
+                    AsyncStorage.setItem("id", response.id);
+                    AsyncStorage.setItem("token", response.token);
+                    AsyncStorage.setItem("userName", response.userName);
+
                     dispatch(loginSuccess(response));
                 }
             });

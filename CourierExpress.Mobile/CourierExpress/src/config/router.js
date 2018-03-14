@@ -26,7 +26,6 @@ export const AuthRoot = StackNavigator({
     {
         upperCaseLabel: false,
         initialRouteName: "Login",
-        mode: 'modal',
         headerMode: 'none',
     }
 );
