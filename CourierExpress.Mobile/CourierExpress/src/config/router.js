@@ -8,6 +8,7 @@ import Register from "../screens/Register/Register";
 import Main from "../screens/Main/Main";
 import MyOrders from "../screens/Main/Orders/MyOrders";
 import AllOrders from "../screens/Main/Orders/AllOrders";
+import OrderDetails from "../screens/Main/Orders/OrderDetails";
 import CreateOrder from "../screens/Main/Orders/CreateOrder";
 import Settings from "../screens/Main/Settings/Settings";
 
@@ -34,14 +35,43 @@ export const MainRoot = StackNavigator({
     Main: {
         screen: Main
     },
-}, {
-
-
+},
+    {
         mode: 'modal',
         headerMode: 'none',
         initialRouteName: "Main",
     });
 
+export const AllOrdersStack = StackNavigator({
+    AllOrders: {
+        screen: AllOrders,
+        navigationOptions: {
+            header: null,
+            tabBarLabel: "All",
+            tabBarIcon: () => {
+                return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
+            }
+        }
+    },
+    OrderDetails: {
+        screen: OrderDetails,
+        navigationOptions: {
+            tabBarVisible: false,
+            headerTitle: "Order details",
+            headerTintColor: '#fff',
+            headerFontSize: "5px",
+            headerStyle: {
+                backgroundColor: "#2c3e50",
+            },
+        },
+    },
+},
+    {
+        mode: 'card',
+        headerMode: 'screen',
+        initialRouteName: "AllOrders",
+    }
+);
 
 export const MainStack = TabNavigator({
     MyOrders: {
@@ -54,13 +84,8 @@ export const MainStack = TabNavigator({
         }
     },
     AllOrders: {
-        screen: AllOrders,
-        navigationOptions: {
-            tabBarLabel: "All",
-            tabBarIcon: () => {
-                return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
-            }
-        }
+        screen: AllOrdersStack,
+
     },
     CreateOrder: {
         screen: CreateOrder,
@@ -71,9 +96,8 @@ export const MainStack = TabNavigator({
             }
         }
     },
-    MyOSettingsrders: {
+    Settings: {
         screen: Settings,
-
         navigationOptions: {
             tabBarLabel: "Settings",
             tabBarIcon: () => {
@@ -100,7 +124,7 @@ export const MainStack = TabNavigator({
         },
         tabBarPosition: 'bottom',
         swipeEnabled: false,
-        lazy: true
+        lazy: false
     }
 );
 

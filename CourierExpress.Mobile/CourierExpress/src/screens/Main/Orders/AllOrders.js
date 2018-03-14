@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, AsyncStorage, Button, TouchableOpacity,
-    ScrollView, BackHandler, Alert, RefreshControl
+    ScrollView, BackHandler, Alert, RefreshControl,
+    FlatList
 } from 'react-native';
+import { List, ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { fetchAllOrders } from "../../../actions/ordersAction";
 
@@ -10,8 +12,11 @@ export class AllOrders extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            orders: [],
+            loading: false,
             refreshing: false,
         };
+        this.onPress = this.onPress.bind(this);
     }
 
     onRefresh() {
@@ -24,11 +29,22 @@ export class AllOrders extends Component {
         this.props.fetchAllOrders();
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            orders: nextProps.orders,
+            loading: false,
+            refreshing: false
+        });
+    }
+
     componentWillUnmount() {
     }
 
+    onPress() {
+        this.props.navigation.navigate("OrderDetails");
+    }
+
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -42,8 +58,29 @@ export class AllOrders extends Component {
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
                             All orders
-                </Text>
+                        </Text>
                     </View>
+                    <List
+                        containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}
+                    >
+                        <FlatList
+                            data={this.state.orders}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    activeOpacity={0.9}
+                                    onPress={this.onPress}
+                                >
+                                    <ListItem
+                                        title={item.description}
+                                        titleStyle={{ color: "white", fontWeight: "normal" }}
+                                        subtitle={`${item.startPoint}-${item.endPoint}`}
+                                        containerStyle={{ borderBottomWidth: 1, backgroundColor: "#2c3e50" }}
+                                    />
+                                </TouchableOpacity>
+                            )}
+                            keyExtractor={item => item.id}
+                        />
+                    </List>
                 </ScrollView>
             </View>
         );
@@ -54,9 +91,8 @@ const mapDispatchToProps = dispatch => ({
     fetchAllOrders: () => dispatch(fetchAllOrders()),
 });
 
-
 const mapStateToProps = state => ({
-    state
+    orders: state.orders.orders
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllOrders);
@@ -71,4 +107,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    orderList: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 });

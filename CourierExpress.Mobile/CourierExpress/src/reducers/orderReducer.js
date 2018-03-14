@@ -7,7 +7,7 @@ export default (state = defaultState, action) => {
         case "ALL_ORDERS_SUCCESS":
             return {
                 ...state,
-                ...action.payload,
+                orders: action.payload,
             };
         case "ALL_ORDERS_FAILURE":
             return {
