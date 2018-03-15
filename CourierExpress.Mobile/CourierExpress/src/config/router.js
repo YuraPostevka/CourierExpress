@@ -56,7 +56,7 @@ export const AllOrdersStack = StackNavigator({
         screen: OrderDetails,
         navigationOptions: {
             tabBarVisible: false,
-            headerTitle: "Order details",
+            headerTitle: "Order Details",
             headerTintColor: '#fff',
             headerFontSize: "5px",
             headerStyle: {
