@@ -9,7 +9,7 @@ namespace CourierExpress.BLL.Services.Interfaces
 
         List<OrderModel> GetMy(int ownerId);
 
-        List<OrderModel> GetById(int id);
+        OrderModel GetById(int id);
 
         void Add(OrderModel model);
 

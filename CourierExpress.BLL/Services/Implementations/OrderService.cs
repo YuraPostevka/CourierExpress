@@ -36,9 +36,9 @@ namespace CourierExpress.BLL.Services.Implementations
             return _context.Orders.Where(x => x.OwnerId == ownerId).ToList();
         }
 
-        public List<OrderModel> GetById(int id)
+        public OrderModel GetById(int id)
         {
-            return _context.Orders.Where(x => x.Id == id).ToList();
+            return _context.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public void Add(OrderModel model)

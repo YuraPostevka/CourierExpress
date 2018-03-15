@@ -62,6 +62,9 @@ export const AllOrdersStack = StackNavigator({
             headerStyle: {
                 backgroundColor: "#2c3e50",
             },
+            headerTitleStyle: {
+                fontWeight: 'normal',
+            },
         },
     },
 },

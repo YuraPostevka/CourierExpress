@@ -16,13 +16,42 @@ export const fetchAllOrdersFailure = response => ({
 export const fetchAllOrders = () => {
     return dispatch => {
         return OrderService.getAll()
-            .then(response => {
+            .catch(error => {
+                Alert.alert("Error");
+                dispatch(fetchAllOrdersFailure());
+            }).
+            then(response => {
                 if (response.error) {
                     dispatch(fetchAllOrdersFailure());
-                    Alert.alert("Incorrect phone number or password!")
+                    Alert.alert("Error");
                 }
                 else {
                     dispatch(fetchAllOrdersSuccess(response));
+                }
+            });
+
+    };
+};
+
+export const fetchOrderDetailsSuccess = response => ({
+    payload: response,
+    type: "ORDER_DETAILS_SUCCESS",
+});
+
+export const fetchOrderDetailsFailure = response => ({
+    type: "ORDER_DETAILS_FAILURE",
+});
+
+export const fetchOrderDetails = (id) => {
+    return dispatch => {
+        return OrderService.getOrderDetails(id)
+            .then(response => {
+                if (response.error) {
+                    dispatch(fetchOrderDetailsFailure());
+                    Alert.alert("Smth wrong!!!")
+                }
+                else {
+                    dispatch(fetchOrderDetailsSuccess(response));
                 }
             });
     };

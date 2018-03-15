@@ -40,8 +40,8 @@ export class AllOrders extends Component {
     componentWillUnmount() {
     }
 
-    onPress() {
-        this.props.navigation.navigate("OrderDetails");
+    onPress(id) {
+        this.props.navigation.navigate("OrderDetails", { id });
     }
 
     render() {
@@ -68,7 +68,7 @@ export class AllOrders extends Component {
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={0.9}
-                                    onPress={this.onPress}
+                                    onPress={() => this.onPress(item.id)}
                                 >
                                     <ListItem
                                         title={item.description}
