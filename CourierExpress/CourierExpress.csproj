@@ -6,6 +6,8 @@
 
     <ItemGroup>
       <None Remove="Properties\PublishProfiles\CourierExpress - Web Deploy.pubxml" />
+      <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
+      <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
     </ItemGroup>
 
     <ItemGroup>

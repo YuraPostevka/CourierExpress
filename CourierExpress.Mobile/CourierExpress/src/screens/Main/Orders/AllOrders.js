@@ -7,6 +7,7 @@ import {
 import { List, ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { fetchAllOrders } from "../../../actions/ordersAction";
+import OrderCard from "./OrderCard";
 
 export class AllOrders extends Component {
     constructor(props) {
@@ -60,29 +61,20 @@ export class AllOrders extends Component {
                             All orders
                         </Text>
                     </View>
-                    <List
-                        containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}
-                    >
-                        <FlatList
-                            data={this.state.orders}
-                            renderItem={({ item }) => (
-                                <TouchableOpacity
-                                    activeOpacity={0.9}
-                                    onPress={() => this.onPress(item.id)}
-                                >
-                                    <ListItem
-                                        title={item.description}
-                                        titleStyle={{ color: "white", fontWeight: "normal" }}
-                                        subtitle={`${item.startPoint}-${item.endPoint}`}
-                                        containerStyle={{ borderBottomWidth: 1, backgroundColor: "#2c3e50" }}
-                                    />
-                                </TouchableOpacity>
-                            )}
-                            keyExtractor={item => item.id}
-                        />
-                    </List>
+                    <FlatList
+                        data={this.state.orders}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                activeOpacity={0.9}
+                                onPress={() => this.onPress(item.id)}
+                            >
+                                <OrderCard order={item} />
+                            </TouchableOpacity>
+                        )}
+                        keyExtractor={item => item.id}
+                    />
                 </ScrollView>
-            </View>
+            </View >
         );
     }
 }
@@ -101,7 +93,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(AllOrders);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#1A2C3E',
     },
     title: {
         alignItems: 'center',

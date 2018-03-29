@@ -4,6 +4,8 @@ import {
     ScrollView
 } from 'react-native';
 
+
+
 export default class CreateOrder extends Component {
     static navigationOptions = {
         title: 'My orders',
@@ -43,11 +45,70 @@ export default class CreateOrder extends Component {
             <View style={styles.container}>
                 <View style={styles.title}>
                     <Text style={{ fontSize: 30, color: "#fff" }}>
-                        Create new order
+                        Create new ordera
                     </Text>
                 </View>
                 <ScrollView >
-                    <TextInput style={styles.input}
+
+                    {/*   <GooglePlacesAutocomplete
+                        placeholder='Search'
+                        minLength={2} // minimum length of text to search
+                        autoFocus={false}
+                        returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+                        listViewDisplayed='auto'    // true/false/undefined
+                        fetchDetails={true}
+                        renderDescription={row => row.description} // custom description render
+                        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+                            console.log(data, details);
+                        }}
+
+                        getDefaultValue={() => ''}
+
+                        query={{
+                            // available options: https://developers.google.com/places/web-service/autocomplete
+                            key: 'YOUR API KEY',
+                            language: 'en', // language of the results
+                            types: '(cities)' // default: 'geocode'
+                        }}
+
+                        styles={{
+                            textInputContainer: {
+                                backgroundColor: 'rgba(0,0,0,0)',
+                                borderTopWidth: 0,
+                                borderBottomWidth: 0
+                            },
+                            textInput: {
+                                marginLeft: 0,
+                                marginRight: 0,
+                                height: 38,
+                                color: '#5d5d5d',
+                                fontSize: 16
+                            },
+                            predefinedPlacesDescription: {
+                                color: '#1faadb'
+                            },
+                        }}
+
+                        currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                        currentLocationLabel="Current location"
+                        nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+                        GoogleReverseGeocodingQuery={{
+                            // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+                        }}
+                        GooglePlacesSearchQuery={{
+                            // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
+                            rankby: 'distance',
+                            types: 'food'
+                        }}
+
+                        filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+                        predefinedPlaces={[homePlace, workPlace]}
+
+                        debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+                        renderLeftButton={() => <Image source={require('path/custom/left-icon')} />}
+                        renderRightButton={() => <Text>Custom text after the input</Text>}
+                    /> */}
+                    {/*  <TextInput style={styles.input}
                         autoCapitalize="none"
                         autoCorrect={false}
                         returnKeyType="next"
@@ -88,6 +149,8 @@ export default class CreateOrder extends Component {
                         <Text>Longitude: {this.state.longitude}</Text>
                         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
                     </View>
+
+                    */}
                 </ ScrollView>
                 <Button
                     onPress={this.onSubmit}
@@ -103,7 +166,7 @@ export default class CreateOrder extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#1A2C3E',
     },
     title: {
         alignItems: 'center',

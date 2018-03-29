@@ -93,7 +93,7 @@ export default connect(mapStateToProps)(MyOrders);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#1A2C3E',
     },
     title: {
         alignItems: 'center',

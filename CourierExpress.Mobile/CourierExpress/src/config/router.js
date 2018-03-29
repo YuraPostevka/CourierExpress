@@ -60,7 +60,7 @@ export const AllOrdersStack = StackNavigator({
             headerTintColor: '#fff',
             headerFontSize: "5px",
             headerStyle: {
-                backgroundColor: "#2c3e50",
+                backgroundColor: "#1A2C3E",
             },
             headerTitleStyle: {
                 fontWeight: 'normal',
@@ -109,13 +109,13 @@ export const MainStack = TabNavigator({
     },
 },
     {
-        initialRouteName: "MyOrders",
+        initialRouteName: "AllOrders",
         tabBarPosition: "bottom",
         tabBarOptions: {
             showLabel: true,
             showIcon: true,
             tabStyle: {
-                backgroundColor: "#2c3e50",
+                backgroundColor: "#1A2C3E",
             },
             labelStyle: {
                 fontSize: 11,

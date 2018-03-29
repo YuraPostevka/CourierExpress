@@ -7,7 +7,9 @@ export default class OrderService {
     static getAll() {
         let token = store.getState().account.token;
         if (token !== null) {
-            return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
+            // return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
+            return fetch("http://10.128.70.181:56096/api/orders/getAll",
+
                 {
                     method: 'GET',
                     headers: {
@@ -33,7 +35,9 @@ export default class OrderService {
     static getOrderDetails(id) {
         let token = store.getState().account.token;
         if (token !== null) {
-            let path = "http://courierexpressapp.azurewebsites.net/api/orders/getById";
+            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/getById";
+            let path = "http://10.128.70.181:56096/api/orders/getById";
+
             return fetch(`${path}/${id}`,
                 {
                     method: 'GET',

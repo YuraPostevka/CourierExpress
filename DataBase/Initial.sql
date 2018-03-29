@@ -42,4 +42,7 @@ ADD CONSTRAINT FK_Orders_Courier
     FOREIGN KEY  (CourierId)
     REFERENCES dbo.Users (Id);
 
+insert into dbo.Users (PhoneNumber,[Name],Password)
+values('1','Yura','1');
+
 

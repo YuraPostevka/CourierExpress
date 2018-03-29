@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {
-    View, Text, StyleSheet, Dimensions
+    View, Text, StyleSheet, Dimensions, TouchableOpacity
 } from 'react-native';
 import Icon from "../../../../node_modules/react-native-vector-icons/Octicons";
 import MoneyIcon from "../../../../node_modules/react-native-vector-icons/FontAwesome";
 import WeightIcon from "../../../../node_modules/react-native-vector-icons/MaterialCommunityIcons";
+import MapView from 'react-native-maps';
 
 import { fetchOrderDetails } from "../../../actions/ordersAction";
 
 var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 export class OrderDetails extends Component {
     constructor(props) {
@@ -39,38 +41,86 @@ export class OrderDetails extends Component {
             <View style={styles.container}>
                 {this.state.orderDetails !== null &&
                     <View>
-                        <View style={{ alignItems: 'center' }}>
-                            <Text style={{ fontSize: 20, color: "#fff" }}>
-                                *Owner name*
-                            </Text>
+                        <View style={{ margin: 10 }}>
+                            <Text style={{ fontSize: 20, color: "#fff", alignItems: 'center', }}>
+                                Someone
+                    </Text>
                         </View>
 
                         <View style={styles.card}>
-                            <Icon style={{ marginRight: 10 }} name="package" size={35} color={"white"} />
-                            <Text>
-                                {this.state.orderDetails.description}
-                            </Text>
+
+                            <View style={{
+                                paddingBottom: 5,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                width: width - 30,
+                            }}>
+                                <Text style={{
+                                    fontSize: 20,
+                                    color: "#fff"
+                                }}>
+                                    {this.state.orderDetails.description}
+                                </Text>
+                            </View>
+
+                            <View style={{}}>
+
+                                <View style={{
+                                    paddingBottom: 5,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    width: width - 30,
+                                }}>
+                                    <WeightIcon style={{ marginRight: 10 }} name="weight-kilogram" size={30} color={"white"} />
+                                    <Text style={styles.text}>
+                                        {this.state.orderDetails.weight}
+                                    </Text>
+                                </View>
+
+                                <View style={{
+                                    position: "absolute",
+                                    right: 0,
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                }}>
+                                    <MoneyIcon style={{ marginRight: 10 }} name="money" size={35} color={"white"} />
+                                    <Text style={{ color: "#fff", fontSize: 20 }}>
+                                        {this.state.orderDetails.price}uah
+                                </Text>
+                                </View>
+
+                            </View>
+
+                            <View style={{ position: "relative" }}>
+                                <View style={styles.line}>
+                                    <Icon style={{ marginRight: 10 }} name="location" size={30} color={"white"} />
+                                    <Text style={styles.text}>
+                                        {this.state.orderDetails.startPoint} -  {this.state.orderDetails.endPoint}
+                                    </Text>
+                                </View>
+                            </View>
+
+                            <View>
+                                <MapView
+                                    mapType='standard'
+                                    style={styles.map}
+                                >
+                                </MapView>
+                            </View>
                         </View>
 
-                        <View style={styles.card}>
-                            <Icon style={{ marginRight: 10 }} name="location" size={30} color={"white"} />
-                            <Text>
-                                {this.state.orderDetails.startPoint} -  {this.state.orderDetails.endPoint}
-                            </Text>
-                        </View>
-
-                        <View style={styles.card}>
-                            <MoneyIcon style={{ marginRight: 10 }} name="money" size={30} color={"white"} />
-                            <Text>
-                                Price - {this.state.orderDetails.price}
-                            </Text>
-                        </View>
-
-                        <View style={styles.card}>
-                            <WeightIcon style={{ marginRight: 10 }} name="weight-kilogram" size={30} color={"white"} />
-                            <Text>
-                                {this.state.orderDetails.weight}
-                            </Text>
+                        <View>
+                            <TouchableOpacity
+                                style={styles.go}>
+                                <Text
+                                    style={{
+                                        fontSize: 20,
+                                        color: "#fff",
+                                        alignSelf: "center"
+                                    }}>
+                                    Go!
+                                  </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 }
@@ -94,16 +144,39 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         justifyContent: 'space-between',
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#1A2C3E',
         alignItems: 'center',
     },
-    card: {
+    line: {
+        paddingBottom: 5,
         flexDirection: 'row',
         alignItems: 'center',
         width: width - 30,
-        borderBottomWidth: 0.5,
-        borderColor: "#fff",
+    },
+    card: {
+        width: width - 10,
+        height: height - 200,
         margin: 10,
-        padding: 10
+        padding: 10,
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#18222c"
+    },
+    text: {
+        color: "#fff",
+    },
+
+    map: {
+        height: 220,
+    },
+    go: {
+        width: "30%",
+        height: 30,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#BD3618"
     }
 });
