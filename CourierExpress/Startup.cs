@@ -21,22 +21,22 @@ namespace CourierExpress
         public IHostingEnvironment HostingEnvironment { get; }
         public IConfigurationRoot ConfigurationsJson { get; }
 
-        public Startup(IHostingEnvironment hostingEnvironment)
-        {
-            Console.WriteLine(HostingEnvironment.EnvironmentName);
-
-            HostingEnvironment = hostingEnvironment;
-            ConfigurationsJson = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{HostingEnvironment.EnvironmentName}.json", true)
-                .Build();
-        }
-
-        //public Startup(IConfiguration configuration)
+        //public Startup(IHostingEnvironment hostingEnvironment)
         //{
-        //    Configuration = configuration;
+        //    Console.WriteLine(HostingEnvironment.EnvironmentName);
+
+        //    HostingEnvironment = hostingEnvironment;
+        //    ConfigurationsJson = new ConfigurationBuilder()
+        //        .SetBasePath(Directory.GetCurrentDirectory())
+        //        .AddJsonFile("appsettings.json")
+        //        .AddJsonFile($"appsettings.{HostingEnvironment.EnvironmentName}.json", true)
+        //        .Build();
         //}
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
         public IConfiguration Configuration { get; }
 
@@ -60,14 +60,14 @@ namespace CourierExpress
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = ConfigurationsJson["Jwt:Issuer"],
-                        ValidAudience = ConfigurationsJson["Jwt:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationsJson["Jwt:Key"]))
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(ConfigurationsJson.GetConnectionString("CourierExpressConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("CourierExpressConnection")));
 
             services.AddMvc();
 
