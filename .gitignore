@@ -251,4 +251,4 @@ paket-files/
 *.sln.iml
 
 PAC/Web/Liebherr.PAC.Web/wwwroot
-appsettings.Development.json
+appsettings.Production.json
