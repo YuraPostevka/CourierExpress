@@ -12,6 +12,7 @@ using CourierExpress.BLL.Services.Implementations;
 using CourierExpress.BLL.Services.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 
 namespace CourierExpress
 {
@@ -22,14 +23,20 @@ namespace CourierExpress
 
         public Startup(IHostingEnvironment hostingEnvironment)
         {
-            HostingEnvironment = hostingEnvironment;
+            Console.WriteLine(HostingEnvironment.EnvironmentName);
 
+            HostingEnvironment = hostingEnvironment;
             ConfigurationsJson = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{HostingEnvironment.EnvironmentName}.json", true)
                 .Build();
         }
+
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
 
         public IConfiguration Configuration { get; }
 
@@ -53,14 +60,14 @@ namespace CourierExpress
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Jwt:Issuer"],
-                        ValidAudience = Configuration["Jwt:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                        ValidIssuer = ConfigurationsJson["Jwt:Issuer"],
+                        ValidAudience = ConfigurationsJson["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationsJson["Jwt:Key"]))
                     };
                 });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("CourierExpressConnection")));
+                options.UseSqlServer(ConfigurationsJson.GetConnectionString("CourierExpressConnection")));
 
             services.AddMvc();
 
