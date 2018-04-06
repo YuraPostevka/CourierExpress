@@ -17,9 +17,18 @@ namespace CourierExpress
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IHostingEnvironment HostingEnvironment { get; }
+        public IConfigurationRoot ConfigurationsJson { get; }
+
+        public Startup(IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            HostingEnvironment = hostingEnvironment;
+
+            ConfigurationsJson = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{HostingEnvironment.EnvironmentName}.json", true)
+                .Build();
         }
 
         public IConfiguration Configuration { get; }
