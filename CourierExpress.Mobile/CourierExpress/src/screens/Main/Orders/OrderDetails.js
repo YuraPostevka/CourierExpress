@@ -6,7 +6,8 @@ import {
 import Icon from "../../../../node_modules/react-native-vector-icons/Octicons";
 import MoneyIcon from "../../../../node_modules/react-native-vector-icons/FontAwesome";
 import WeightIcon from "../../../../node_modules/react-native-vector-icons/MaterialCommunityIcons";
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
 import { fetchOrderDetails } from "../../../actions/ordersAction";
 
@@ -16,6 +17,9 @@ var height = Dimensions.get('window').height;
 export class OrderDetails extends Component {
     constructor(props) {
         super(props);
+
+        this.mapRef = null;
+
         this.state = {
             orderDetails: null
         };
@@ -24,7 +28,7 @@ export class OrderDetails extends Component {
     componentDidMount() {
         const { id } = this.props.navigation.state.params;
         if (id && id !== null) {
-    
+
             this.props.fetchOrderDetails(id);
         }
     }
@@ -103,9 +107,47 @@ export class OrderDetails extends Component {
 
                             <View>
                                 <MapView
+                                    ref={(ref) => { this.mapRef = ref }}
                                     mapType='standard'
                                     style={styles.map}
+                                    initialRegion={{
+                                        latitude: 48.292079,
+                                        longitude: 25.935837,
+                                        latitudeDelta: 0.019,
+                                        longitudeDelta: 0.019
+                                    }}
                                 >
+                                    <Marker
+                                        coordinate={{
+                                            latitude: 48.260229,
+                                            longitude: 25.954463
+                                        }}
+                                        title={"title"}
+                                        description={"de"}
+                                    />
+                                    <Marker
+                                        coordinate={{
+                                            latitude: 48.288735,
+                                            longitude: 25.953587
+                                        }}
+                                        title={"title"}
+                                        description={"de"}
+                                    />
+
+                                    <MapViewDirections
+                                        origin={{
+                                            latitude: "48.260229",
+                                            longitude: 25.954463
+                                        }}
+                                        destination={{
+                                            latitude: 48.288735,
+                                            longitude: 25.953587
+                                        }}
+                                        apikey={"AIzaSyDkbm-aj_E9xZj5U9fUyU71c0rpeGVHe2Q"}
+                                        mode={"walking"}
+                                        strokeWidth={5}
+                                        strokeColor="#0B94D8"
+                                    />
                                 </MapView>
                             </View>
                         </View>

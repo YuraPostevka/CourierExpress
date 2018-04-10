@@ -23,6 +23,7 @@ CREATE TABLE Orders
 	OwnerId									   int NOT NULL,
 	CourierId								   int NULL,
 	StartPoint	                               nvarchar(max) NOT NULL,
+	Coordinates	                               nvarchar(max) NOT NULL,
 	[EndPoint]	                               nvarchar(max) NOT NULL,
 	[Status]								   int NOT NULL,
 	

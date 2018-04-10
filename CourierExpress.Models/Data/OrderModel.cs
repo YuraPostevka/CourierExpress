@@ -27,6 +27,8 @@ namespace CourierExpress.Models.Data
 
         public string EndPoint { get; set; }
 
+        public string Coordinates { get; set; }
+
         public OrderStatus Status { get; set; }
     }
 }
