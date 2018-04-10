@@ -21,7 +21,26 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             try
             {
-                var orders = _context.Orders.ToList();
+                var query = from order in _context.Orders
+                            join owner in _context.Users on order.OwnerId equals owner.Id
+                            select new OrderModel
+                            {
+                                Id = order.Id,
+                                Description = order.Description,
+                                Price = order.Price,
+                                Status = order.Status,
+                                StartPoint = order.StartPoint,
+                                EndPoint = order.EndPoint,
+                                Weight = order.Weight,
+                                OwnerId = order.OwnerId,
+                                Owner = owner != null ? new Models.UserModel
+                                {
+                                    Id = owner.Id,
+                                    Name = owner.Name,
+                                    PhoneNumber = owner.PhoneNumber
+                                } : null
+                            };
+                var orders = query.ToList();
                 return orders;
             }
             catch (Exception ex)
@@ -38,7 +57,28 @@ namespace CourierExpress.BLL.Services.Implementations
 
         public OrderModel GetById(int id)
         {
-            return _context.Orders.FirstOrDefault(x => x.Id == id);
+            var query = from order in _context.Orders
+                        join owner in _context.Users on order.OwnerId equals owner.Id
+                        select new OrderModel
+                        {
+                            Id = order.Id,
+                            Description = order.Description,
+                            Price = order.Price,
+                            Status = order.Status,
+                            StartPoint = order.StartPoint,
+                            EndPoint = order.EndPoint,
+                            Weight = order.Weight,
+                            OwnerId = order.OwnerId,
+                            Owner = owner != null ? new Models.UserModel
+                            {
+                                Id = owner.Id,
+                                Name = owner.Name,
+                                PhoneNumber = owner.PhoneNumber
+                            } : null
+                        };
+            var res =  query.FirstOrDefault(x => x.Id == id);
+
+            return res;
         }
 
         public void Add(OrderModel model)

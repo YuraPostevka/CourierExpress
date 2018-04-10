@@ -59,91 +59,82 @@ export default class CreateOrder extends Component {
                     </Text>
                 </View>
 
-                <View>
-                    <TextInput style={styles.field}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        keyboardType='default'
-                        returnKeyType="next"
-                        placeholder='Name'
-                        maxLength={20}
-                        placeholderTextColor='rgba(225,225,225,0.7)'
-                        onChangeText={(description) => this.setState({ description })}
-                        value={this.state.description}
-                    />
+                {/* <View> */}
+                <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
+                    placeholder='Description'
+                    maxLength={20}
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(description) => this.setState({ description })}
+                    value={this.state.description}
+                />
 
-                    <TextInput style={styles.field}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        keyboardType='default'
-                        returnKeyType="next"
-                        placeholder='From'
-                        maxLength={20}
-                        placeholderTextColor='rgba(225,225,225,0.7)'
-                        onChangeText={(from) => this.setState({ from })}
-                        value={this.state.from}
-                    />
+                <GooglePlacesAutocomplete
+                    placeholder='From'
+                    minLength={2} // minimum length of text to search
+                    autoFocus={false}
+                    returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
+                    listViewDisplayed='auto'    // true/false/undefined
+                    fetchDetails={true}
+                    renderDescription={row => row.description} // custom description render
+                    onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+                        console.log(data, details);
+                    }}
 
-                    <GooglePlacesAutocomplete
-                        placeholder='From'
-                        minLength={2} // minimum length of text to search
-                        autoFocus={false}
-                        returnKeyType={'search'} // Can be left out for default return key https://facebook.github.io/react-native/docs/textinput.html#returnkeytype
-                        listViewDisplayed='auto'    // true/false/undefined
-                        renderDescription={row => row.description} // custom description render
-                        onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-                            console.log(data, details);
-                        }}
+                    getDefaultValue={() => ''}
 
-                        getDefaultValue={() => ''}
+                    query={{
+                        // available options: https://developers.google.com/places/web-service/autocomplete
+                        key: 'AIzaSyC6dMZKkK7f2DG1DrIRVNnVKsTSLLiLIVE',
+                        language: 'en', // language of the results,
+                        types: ['address'] // default: 'geocode'
+                    }}
 
-                        query={{
-                            // available options: https://developers.google.com/places/web-service/autocomplete
-                            key: 'AIzaSyC6dMZKkK7f2DG1DrIRVNnVKsTSLLiLIVE',
-                            language: 'en', // language of the results,
-                            types: ['address'] // default: 'geocode'
-                        }}
+                    styles={{
+                        container: {
+                            width: "80%",
+                            alignSelf: "center"
+                        },
+                        description: {
+                            color: "#fff",
+                        },
+                        textInputContainer: {
+                            backgroundColor: 'transparent',
+                            borderBottomWidth: 0.5,
+                            alignSelf: "center"
+                            // width: "80%",
+                            // alignItems: 'center',
+                            // justifyContent: 'center',
+                        },
+                        textInput: {
+                            backgroundColor: 'transparent',
+                            padding: 0,
+                            margin: -5,
+                            height: 38,
+                            color: "#fff",
+                            fontSize: 14
+                        }
+                    }}
 
-                        styles={{
-                            textInputContainer: {
-                                backgroundColor: 'rgba(0,0,0,0)',
-                                borderTopWidth: 0,
-                                borderBottomWidth: 0,
-                                // alignSelf: "center",
-                                // width: "88%",
-                                // paddingBottom: 5
-                            },
-                            textInput: {
-                                // backgroundColor: "transparent",
-                                // borderBottomWidth: 0.4,
-                                // borderBottomColor: "#fff",
+                    nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
+                    GoogleReverseGeocodingQuery={{
+                        // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
+                    }}
+                    GooglePlacesSearchQuery={{
+                        rankby: 'distance',
+                        types: 'food'
+                    }}
 
-                                marginLeft: 0,
-                                marginRight: 0,
-                                height: 38,
-                                color: '#5d5d5d',
-                                fontSize: 16
-                            },
-                            predefinedPlacesDescription: {
-                                color: '#1faadb'
-                            },
-                        }}
+                    filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
+                    // predefinedPlaces={[homePlace, workPlace]}
 
-                        nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-                        GoogleReverseGeocodingQuery={{
-                            // available options for GoogleReverseGeocoding API : https://developers.google.com/maps/documentation/geocoding/intro
-                        }}
-                        GooglePlacesSearchQuery={{
-                            rankby: 'distance',
-                            types: 'food'
-                        }}
+                    debounce={200}
+                />
 
-                        filterReverseGeocodingByTypes={['locality', 'sublocality', 'administrative_area_level_1']}
-                        predefinedPlaces={[homePlace, workPlace]}
-                        debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-                    />
-
-                </View>
+                {/* </View> */}
 
                 <View style={{
                     position: "absolute",
@@ -181,6 +172,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         borderBottomWidth: 0.2,
         borderBottomColor: "#fff",
-        paddingBottom: 5
+        padding: 16,
+        paddingBottom: 2
     }
 });

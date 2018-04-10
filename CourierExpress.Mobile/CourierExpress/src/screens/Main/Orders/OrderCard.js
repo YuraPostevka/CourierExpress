@@ -21,7 +21,7 @@ export default class Orderline extends Component {
 
                 <View style={{ margin: 10 }}>
                     <Text style={{ fontSize: 20, color: "#fff" }}>
-                        Someone
+                        {order.owner.name}
                     </Text>
                 </View>
 

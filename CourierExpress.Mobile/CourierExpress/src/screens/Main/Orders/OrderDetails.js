@@ -24,6 +24,7 @@ export class OrderDetails extends Component {
     componentDidMount() {
         const { id } = this.props.navigation.state.params;
         if (id && id !== null) {
+    
             this.props.fetchOrderDetails(id);
         }
     }
@@ -43,8 +44,8 @@ export class OrderDetails extends Component {
                     <View>
                         <View style={{ margin: 10 }}>
                             <Text style={{ fontSize: 20, color: "#fff", alignItems: 'center', }}>
-                                Someone
-                    </Text>
+                                {this.state.orderDetails.owner.name}
+                            </Text>
                         </View>
 
                         <View style={styles.card}>

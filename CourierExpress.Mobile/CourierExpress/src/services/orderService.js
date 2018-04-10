@@ -8,7 +8,7 @@ export default class OrderService {
         let token = store.getState().account.token;
         if (token !== null) {
             return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
-                // return fetch("http://10.128.70.181:56096/api/orders/getAll",
+            // return fetch("http://10.128.70.181:56096/api/orders/getAll",
 
                 {
                     method: 'GET',
