@@ -37,7 +37,7 @@ export class LoginForm extends Component {
                     autoCorrect={false}
                     keyboardType='phone-pad'
                     returnKeyType="next"
-                    placeholder='Mobile Num'
+                    placeholder='Номер телефону'
                     maxLength={13}
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     onChangeText={(number) => this.setState({ number })}
@@ -46,7 +46,7 @@ export class LoginForm extends Component {
 
                 <TextInput style={styles.input}
                     returnKeyType="go"
-                    placeholder='Password'
+                    placeholder='Пароль'
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     secureTextEntry
                     onChangeText={(password) => this.setState({ password })}
@@ -55,7 +55,7 @@ export class LoginForm extends Component {
 
                 <Button
                     onPress={this.onSubmit}
-                    title="Login"
+                    title="Увійти"
                     color="#2980b6"
                     disabled={this.state.number === "" || this.state.password === ""}
                 />

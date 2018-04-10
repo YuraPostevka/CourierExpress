@@ -21,7 +21,7 @@ export class Settings extends Component {
                 <ScrollView>
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
-                            Settings
+                            Налаштування
                 </Text>
                     </View>
                 </ScrollView>

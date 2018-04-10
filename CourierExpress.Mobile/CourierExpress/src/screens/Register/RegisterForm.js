@@ -50,7 +50,7 @@ export default class RegisterForm extends Component {
                     autoCapitalize="none"
                     autoCorrect={false}
                     returnKeyType="next"
-                    placeholder='Pick a username'
+                    placeholder="Введіть ім'я"
                     maxLength={12}
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     onChangeText={(name) => this.setState({ name })}
@@ -71,7 +71,7 @@ export default class RegisterForm extends Component {
 
                 <TextInput style={styles.input}
                     returnKeyType="go"
-                    placeholder='Create a password'
+                    placeholder='Пароль'
                     placeholderTextColor='rgba(225,225,225,0.7)'
                     secureTextEntry
                     onChangeText={(password) => this.setState({ password })}
@@ -80,7 +80,7 @@ export default class RegisterForm extends Component {
 
                 <Button
                     onPress={this.onSubmit}
-                    title="Register"
+                    title="Зареєструватися"
                     color="#2980b6"
                     disabled={this.state.number === "" || this.state.password === "" || this.state.name === ""}
                 />

@@ -58,7 +58,7 @@ export class AllOrders extends Component {
                 >
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
-                            All orders
+                            Всі замовлення
                         </Text>
                     </View>
                     <FlatList

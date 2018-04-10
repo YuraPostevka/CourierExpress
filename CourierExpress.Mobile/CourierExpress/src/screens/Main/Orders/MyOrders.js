@@ -54,7 +54,7 @@ export class MyOrders extends Component {
                 <ScrollView>
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
-                            My orders
+                            Мої замовлення
                 </Text>
                     </View>
                     <Text>

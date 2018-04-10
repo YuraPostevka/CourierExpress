@@ -25,7 +25,7 @@ export default class Register extends Component {
                         onPress={() => navigate("Login")}
                     >
                         <Text style={styles.redirectButtonText}>
-                            Alerady have an account
+                            Вже маю аккаунт
                              </Text>
                     </TouchableOpacity>
                 </View>

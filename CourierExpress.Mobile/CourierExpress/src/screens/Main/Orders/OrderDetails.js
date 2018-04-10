@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import {
-    View, Text, StyleSheet, Dimensions, TouchableOpacity
+    View, Text, StyleSheet, Dimensions, TouchableOpacity, Alert
 } from 'react-native';
 import Icon from "../../../../node_modules/react-native-vector-icons/Octicons";
 import MoneyIcon from "../../../../node_modules/react-native-vector-icons/FontAwesome";
@@ -42,6 +42,11 @@ export class OrderDetails extends Component {
     }
 
     render() {
+        let coords = null;
+        if (this.state.orderDetails !== null) {
+            // Alert.alert(this.state.orderDetails.coordinates);
+            coords = JSON.parse(this.state.orderDetails.coordinates);
+        }
         return (
             <View style={styles.container}>
                 {this.state.orderDetails !== null &&
@@ -91,7 +96,7 @@ export class OrderDetails extends Component {
                                     <MoneyIcon style={{ marginRight: 10 }} name="money" size={35} color={"white"} />
                                     <Text style={{ color: "#fff", fontSize: 20 }}>
                                         {this.state.orderDetails.price}uah
-                                </Text>
+                                    </Text>
                                 </View>
 
                             </View>
@@ -118,31 +123,25 @@ export class OrderDetails extends Component {
                                     }}
                                 >
                                     <Marker
-                                        coordinate={{
-                                            latitude: 48.260229,
-                                            longitude: 25.954463
-                                        }}
-                                        title={"title"}
-                                        description={"de"}
+                                        // coordinate={{
+                                        //     latitude: 48.260229,
+                                        //     longitude: 25.954463
+                                        // }}
+                                        coordinate={coords.startPoint !== null ? coords.startPoint : {}}
+                                        title={this.state.orderDetails.startPoint}
                                     />
                                     <Marker
-                                        coordinate={{
-                                            latitude: 48.288735,
-                                            longitude: 25.953587
-                                        }}
-                                        title={"title"}
-                                        description={"de"}
+                                        // coordinate={{
+                                        //     latitude: 48.288735,
+                                        //     longitude: 25.953587
+                                        // }}
+                                        coordinate={coords.endPoint !== null ? coords.endPoint : {}}
+                                        title={this.state.orderDetails.endPoint}
                                     />
 
                                     <MapViewDirections
-                                        origin={{
-                                            latitude: "48.260229",
-                                            longitude: 25.954463
-                                        }}
-                                        destination={{
-                                            latitude: 48.288735,
-                                            longitude: 25.953587
-                                        }}
+                                        origin={coords.startPoint !== null ? coords.startPoint : {}}
+                                        destination={coords.endPoint !== null ? coords.endPoint : {}}
                                         apikey={"AIzaSyDkbm-aj_E9xZj5U9fUyU71c0rpeGVHe2Q"}
                                         mode={"walking"}
                                         strokeWidth={5}
@@ -151,6 +150,8 @@ export class OrderDetails extends Component {
                                 </MapView>
                             </View>
                         </View>
+
+                        {/* "{"startPoint":{"latitude": 48.291771,"longitude": 25.934244},"endPoint":{"latitude": 48.27618,"longitude": 25.963001}}" */}
 
                         <View>
                             <TouchableOpacity
@@ -161,7 +162,7 @@ export class OrderDetails extends Component {
                                         color: "#fff",
                                         alignSelf: "center"
                                     }}>
-                                    Go!
+                                    Вперед!
                                   </Text>
                             </TouchableOpacity>
                         </View>

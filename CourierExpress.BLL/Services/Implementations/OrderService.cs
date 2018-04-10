@@ -33,6 +33,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 EndPoint = order.EndPoint,
                                 Weight = order.Weight,
                                 OwnerId = order.OwnerId,
+                                Coordinates=order.Coordinates,
                                 Owner = owner != null ? new Models.UserModel
                                 {
                                     Id = owner.Id,
@@ -69,6 +70,7 @@ namespace CourierExpress.BLL.Services.Implementations
                             EndPoint = order.EndPoint,
                             Weight = order.Weight,
                             OwnerId = order.OwnerId,
+                            Coordinates = order.Coordinates,
                             Owner = owner != null ? new Models.UserModel
                             {
                                 Id = owner.Id,

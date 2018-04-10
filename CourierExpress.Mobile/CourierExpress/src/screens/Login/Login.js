@@ -36,7 +36,7 @@ export default class Login extends Component {
                         onPress={() => navigate("Register")}
                     >
                         <Text style={styles.redirectButtonText}>
-                            Register
+                            Реєстрація
                              </Text>
                     </TouchableOpacity>
                 </View>

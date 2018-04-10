@@ -46,7 +46,7 @@ export const AllOrdersStack = StackNavigator({
         screen: AllOrders,
         navigationOptions: {
             header: null,
-            tabBarLabel: "All",
+            tabBarLabel: "Всі",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
             }
@@ -56,7 +56,7 @@ export const AllOrdersStack = StackNavigator({
         screen: OrderDetails,
         navigationOptions: {
             tabBarVisible: false,
-            headerTitle: "Order Details",
+            headerTitle: "Деталі",
             headerTintColor: '#fff',
             headerFontSize: "5px",
             headerStyle: {
@@ -79,7 +79,7 @@ export const MainStack = TabNavigator({
     MyOrders: {
         screen: MyOrders,
         navigationOptions: {
-            tabBarLabel: "My",
+            tabBarLabel: "Мої",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-home-outline" size={25} color={"white"} />;
             }
@@ -92,7 +92,7 @@ export const MainStack = TabNavigator({
     CreateOrder: {
         screen: CreateOrder,
         navigationOptions: {
-            tabBarLabel: "Create",
+            tabBarLabel: "Створити",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
             }
@@ -101,7 +101,7 @@ export const MainStack = TabNavigator({
     Settings: {
         screen: Settings,
         navigationOptions: {
-            tabBarLabel: "Settings",
+            tabBarLabel: "Налаштування",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-settings-outline" size={25} color={"white"} />;
             }

@@ -55,7 +55,7 @@ export default class CreateOrder extends Component {
 
                 <View style={styles.title}>
                     <Text style={{ fontSize: 30, color: "#fff" }}>
-                        Add
+                        Створити
                     </Text>
                 </View>
 
