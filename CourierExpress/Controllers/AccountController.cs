@@ -56,7 +56,8 @@ namespace CourierExpress.Controllers
             {
                 token = tokenString,
                 userName = user.Name,
-                id = user.Id
+                id = user.Id,
+                phoneNumber = user.PhoneNumber
             });
         }
 

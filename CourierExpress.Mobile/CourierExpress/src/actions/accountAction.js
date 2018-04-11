@@ -12,6 +12,7 @@ export const loginFailure = response => ({
     type: "LOGIN_FAILURE",
 });
 
+
 export const login = (number, password) => {
     return dispatch => {
         return AccountService.login(number, password)
@@ -24,10 +25,19 @@ export const login = (number, password) => {
                     AsyncStorage.setItem("id", response.id);
                     AsyncStorage.setItem("token", response.token);
                     AsyncStorage.setItem("userName", response.userName);
+                    AsyncStorage.setItem("phoneNumber", response.phoneNumber);
 
                     dispatch(loginSuccess(response));
                 }
             });
+    };
+};
+
+export const logOut = () => {
+    return dispatch => {
+        dispatch({
+            type: "LOG_OUT"
+        });
     };
 };
 
