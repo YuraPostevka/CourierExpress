@@ -5,7 +5,7 @@ import MapView from 'react-native-maps';
 
 import { connect } from "react-redux";
 
-export class MyOrders extends Component {
+export class Active extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -87,7 +87,7 @@ const mapStateToProps = state => ({
     account: state.account
 });
 
-export default connect(mapStateToProps)(MyOrders);
+export default connect(mapStateToProps)(Active);
 
 // define your styles
 const styles = StyleSheet.create({

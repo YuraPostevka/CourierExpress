@@ -2,6 +2,7 @@
 using CourierExpress.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CourierExpress.Controllers
 {
@@ -21,21 +22,42 @@ namespace CourierExpress.Controllers
         [Route("getAll")]
         public IActionResult Get()
         {
-            return Json(_orderService.Get());
+            try
+            {
+                return Json(_orderService.Get());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { code = 500, message = ex.Message });
+            }
         }
 
         [HttpGet]
         [Route("getMy/{ownerId}")]
         public IActionResult GetMy(int ownerId)
         {
-            return Json(_orderService.GetMy(ownerId));
+            try
+            {
+                return Json(_orderService.GetMy(ownerId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { code = 500, message = ex.Message });
+            }
         }
 
         [HttpGet]
         [Route("getById/{id}")]
         public IActionResult GetById(int id)
         {
-            return Json(_orderService.GetById(id));
+            try
+            {
+                return Json(_orderService.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { code = 500, message = ex.Message });
+            }
         }
 
         [HttpPost]
@@ -50,7 +72,23 @@ namespace CourierExpress.Controllers
             }
             catch
             {
-                return BadRequest(new { error = 412, message = "Operation failed" });
+                return BadRequest(new { code = 500, message = "Operation failed" });
+            }
+        }
+
+        [HttpPost]
+        [Route("accept/{orderId}/{courierId}")]
+        public IActionResult Accept(int orderId,int courierId)
+        {
+            try
+            {
+                _orderService.Accept(orderId, 3);
+                return Ok(new { code = 200 });
+
+            }
+            catch
+            {
+                return BadRequest(new { code = 500, message = "Operation failed" });
             }
         }
 
@@ -66,7 +104,7 @@ namespace CourierExpress.Controllers
             }
             catch
             {
-                return BadRequest(new { error = 412, message = "Operation failed" });
+                return BadRequest(new { code = 500, message = "Operation failed" });
             }
         }
     }

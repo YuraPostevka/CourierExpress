@@ -6,7 +6,7 @@ import Login from "../screens/Login/Login";
 import Register from "../screens/Register/Register";
 
 import Main from "../screens/Main/Main";
-import MyOrders from "../screens/Main/Orders/MyOrders";
+import Active from "../screens/Main/Orders/Active";
 import AllOrders from "../screens/Main/Orders/AllOrders";
 import OrderDetails from "../screens/Main/Orders/OrderDetails";
 import CreateOrder from "../screens/Main/Orders/CreateOrder";
@@ -46,7 +46,6 @@ export const AllOrdersStack = StackNavigator({
         screen: AllOrders,
         navigationOptions: {
             header: null,
-            tabBarLabel: "Всі",
             tabBarIcon: () => {
                 return <IconIonicons name="ios-list-box-outline" size={25} color={"white"} />;
             }
@@ -67,6 +66,20 @@ export const AllOrdersStack = StackNavigator({
             },
         },
     },
+    CreateOrder: {
+        screen: CreateOrder,
+        navigationOptions: {
+            tabBarVisible: false,
+            headerTintColor: '#fff',
+            headerFontSize: "5px",
+            headerStyle: {
+                backgroundColor: "#1A2C3E",
+            },
+            headerTitleStyle: {
+                fontWeight: 'normal',
+            },
+        }
+    }
 },
     {
         mode: 'card',
@@ -76,12 +89,12 @@ export const AllOrdersStack = StackNavigator({
 );
 
 export const MainStack = TabNavigator({
-    MyOrders: {
-        screen: MyOrders,
+    Active: {
+        screen: Active,
         navigationOptions: {
-            tabBarLabel: "Мої",
+            tabBarLabel: null,
             tabBarIcon: () => {
-                return <IconIonicons name="ios-home-outline" size={25} color={"white"} />;
+                return <IconIonicons name="ios-walk-outline" size={25} color={"white"} />;
             }
         }
     },
@@ -89,19 +102,19 @@ export const MainStack = TabNavigator({
         screen: AllOrdersStack,
 
     },
-    CreateOrder: {
-        screen: CreateOrder,
-        navigationOptions: {
-            tabBarLabel: "Створити",
-            tabBarIcon: () => {
-                return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
-            }
-        }
-    },
+    // CreateOrder: {
+    //     screen: CreateOrder,
+    //     navigationOptions: {
+    //         tabBarLabel: null,
+    //         tabBarIcon: () => {
+    //             return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
+    //         }
+    //     }
+    // },
     Settings: {
         screen: Settings,
         navigationOptions: {
-            tabBarLabel: "Налаштування",
+            tabBarLabel: null,
             tabBarIcon: () => {
                 return <IconIonicons name="ios-settings-outline" size={25} color={"white"} />;
             }
@@ -112,7 +125,7 @@ export const MainStack = TabNavigator({
         initialRouteName: "AllOrders",
         tabBarPosition: "bottom",
         tabBarOptions: {
-            showLabel: true,
+            showLabel: false,
             showIcon: true,
             tabStyle: {
                 backgroundColor: "#1A2C3E",

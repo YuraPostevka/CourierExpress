@@ -21,9 +21,9 @@ export const fetchAllOrders = () => {
                 dispatch(fetchAllOrdersFailure());
             }).
             then(response => {
-                if (response.error) {
+                if (response.code && response.code !== 200) {
                     dispatch(fetchAllOrdersFailure());
-                    Alert.alert("Error");
+                    Alert.alert(response.message);
                 }
                 else {
                     dispatch(fetchAllOrdersSuccess(response));
@@ -46,9 +46,9 @@ export const fetchOrderDetails = (id) => {
     return dispatch => {
         return OrderService.getOrderDetails(id)
             .then(response => {
-                if (response.error) {
+                if (response.code && reposnse.code !== 200) {
                     dispatch(fetchOrderDetailsFailure());
-                    Alert.alert("Smth wrong!!!")
+                    Alert.alert(response.message)
                 }
                 else {
                     dispatch(fetchOrderDetailsSuccess(response));

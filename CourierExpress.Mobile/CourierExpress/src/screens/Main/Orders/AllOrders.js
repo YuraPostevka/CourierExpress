@@ -17,7 +17,9 @@ export class AllOrders extends Component {
             loading: false,
             refreshing: false,
         };
-        this.onPress = this.onPress.bind(this);
+        this.goToDetails = this.goToDetails.bind(this);
+        this.add = this.add.bind(this);
+
     }
 
     onRefresh() {
@@ -41,8 +43,12 @@ export class AllOrders extends Component {
     componentWillUnmount() {
     }
 
-    onPress(id) {
+    goToDetails(id) {
         this.props.navigation.navigate("OrderDetails", { id });
+    }
+
+    add() {
+        this.props.navigation.navigate("CreateOrder");
     }
 
     render() {
@@ -57,16 +63,25 @@ export class AllOrders extends Component {
                     }
                 >
                     <View style={styles.title}>
-                        <Text style={{ fontSize: 30, color: "#fff" }}>
-                            Всі замовлення
-                        </Text>
+                        <TouchableOpacity
+                            onPress={this.add}
+                            style={styles.add}>
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    color: "#fff",
+                                    alignSelf: "center"
+                                }}>
+                                Додати
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <FlatList
                         data={this.state.orders}
                         renderItem={({ item }) => (
-                            <TouchableOpacity
+                            < TouchableOpacity
                                 activeOpacity={0.9}
-                                onPress={() => this.onPress(item.id)}
+                                onPress={() => this.goToDetails(item.id)}
                             >
                                 <OrderCard order={item} />
                             </TouchableOpacity>
@@ -103,5 +118,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    add: {
+        width: "30%",
+        height: 30,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#BD3618",
+        marginTop: 20
     }
 });

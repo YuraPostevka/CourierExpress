@@ -52,13 +52,6 @@ export default class CreateOrder extends Component {
         return (
             <View style={styles.container}>
 
-
-                <View style={styles.title}>
-                    <Text style={{ fontSize: 30, color: "#fff" }}>
-                        Створити
-                    </Text>
-                </View>
-
                 {/* <View> */}
                 <TextInput style={styles.field}
                     autoCapitalize="none"

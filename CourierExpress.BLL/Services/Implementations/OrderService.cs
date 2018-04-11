@@ -24,6 +24,7 @@ namespace CourierExpress.BLL.Services.Implementations
             {
                 var query = from order in _context.Orders
                             join owner in _context.Users on order.OwnerId equals owner.Id
+                            where order.Status == OrderStatus.Pending
                             select new OrderModel
                             {
                                 Id = order.Id,
@@ -95,7 +96,17 @@ namespace CourierExpress.BLL.Services.Implementations
 
         public void Accept(int orderId, int courierId)
         {
-            throw new System.NotImplementedException();
+            var order = _context.Orders.FirstOrDefault(x => x.Id == orderId && x.CourierId == null);
+            if (order != null)
+            {
+                order.CourierId = courierId;
+                order.Status = OrderStatus.Accepted;
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Замовлення вже прийнято");
+            }
         }
 
         public void Close(int orderId)

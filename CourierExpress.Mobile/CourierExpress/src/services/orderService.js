@@ -58,4 +58,37 @@ export default class OrderService {
                 });
         }
     }
+
+    static accept(orderId, courierId) {
+        let token = store.getState().account.token;
+        if (token !== null) {
+            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/accept";
+            let path = "http://10.128.70.181:56096/api/orders/accept";
+
+            let data = {
+                orderId: orderId,
+                courierId: courierId
+            };
+
+            return fetch(`${path}/${orderId}/${courierId}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: null
+                },
+            )
+                .then(response => response.json())
+                .then(resp => {
+                    return resp;
+                })
+                .catch((error) => {
+                    Alert.alert(error.error);
+                    return Promise(error.error);
+                });
+        }
+    }
 }

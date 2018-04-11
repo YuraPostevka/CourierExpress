@@ -10,6 +10,7 @@ import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
 import { fetchOrderDetails } from "../../../actions/ordersAction";
+import OrderService from "../../../services/orderService";
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -23,6 +24,8 @@ export class OrderDetails extends Component {
         this.state = {
             orderDetails: null
         };
+
+        this.onPress = this.onPress.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +50,24 @@ export class OrderDetails extends Component {
             });
 
         }
+    }
+
+    onPress() {
+        this.props.navigation.goBack();
+        // if (this.state.orderDetails.id === this.props.account.id) {
+        //     //delete
+        // }
+        // else {
+        //     OrderService.accept(this.state.orderDetails.id, this.props.account.id)
+        //         .then(res => {
+        //             if (res.code && res.code !== 200) {
+        //                 Alert.alert(res.message);
+        //             }
+        //             else {
+        //                 
+        //             }
+        //         });
+        // }
     }
 
     render() {
@@ -161,8 +182,7 @@ export class OrderDetails extends Component {
 
                         <View>
                             <TouchableOpacity
-                                onPress={() => {
-                                }}
+                                onPress={this.onPress}
                                 style={styles.go}>
                                 <Text
                                     style={{

@@ -16,9 +16,9 @@ export const login = (number, password) => {
     return dispatch => {
         return AccountService.login(number, password)
             .then(response => {
-                if (response.error) {
+                if (response.code && response.code !== 200) {
                     dispatch(loginFailure());
-                    Alert.alert("Incorrect phone number or password!");
+                    Alert.alert(response.message);
                 }
                 else {
                     AsyncStorage.setItem("id", response.id);
@@ -35,7 +35,7 @@ export const register = (name, number, password, navigate) => {
     return dispatch => {
         return AccountService.register(name, number, password)
             .then(response => {
-                if (response.error) {
+                if (response.code && response.code !== 200) {
                     Alert.alert(response.message);
                 }
                 else {

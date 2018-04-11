@@ -32,11 +32,11 @@ namespace CourierExpress.Controllers
             try
             {
                 _userService.Add(model);
-                return Ok(new { success = 1 });
+                return Ok(new { code = 200 });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { error = 401, message = ex.Message });
+                return BadRequest(new { code = 401, message = ex.Message });
             }
         }
 
@@ -48,7 +48,7 @@ namespace CourierExpress.Controllers
             var user = _userService.Get(applicationUser.PhoneNumber, applicationUser.Password);
             if (user == null)
             {
-                return BadRequest(new { error = 401, message = "Unauthorized" });
+                return BadRequest(new { code = 401, message = "Unauthorized" });
             }
 
             var tokenString = BuildToken(user);

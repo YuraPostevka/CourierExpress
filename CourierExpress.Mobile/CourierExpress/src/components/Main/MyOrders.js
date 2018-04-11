@@ -6,9 +6,9 @@ import {
 
 import { connect } from "react-redux";
 
-export class MyOrders extends Component {
+export class Active extends Component {
     static navigationOptions = {
-        title: 'My orders',
+        title: 'Active',
         swipeEnabled: false
     };
 
@@ -60,7 +60,7 @@ const mapStateToProps = state => ({
     account: state.account
 });
 
-export default connect(mapStateToProps)(MyOrders);
+export default connect(mapStateToProps)(Active);
 
 // define your styles
 const styles = StyleSheet.create({

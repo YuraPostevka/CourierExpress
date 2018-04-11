@@ -24,7 +24,7 @@ export class LoginForm extends Component {
         Keyboard.dismiss();
 
         this.props.login(this.state.number, this.state.password);
-        this.props.navigate("MyOrders");
+        this.props.navigate("Active");
     }
 
     render() {
