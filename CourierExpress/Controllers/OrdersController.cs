@@ -53,5 +53,21 @@ namespace CourierExpress.Controllers
                 return BadRequest(new { error = 412, message = "Operation failed" });
             }
         }
+
+        [HttpPost]
+        [Route("remove")]
+        public IActionResult Remove([FromBody]int orderId)
+        {
+            try
+            {
+                _orderService.Remove(orderId);
+                return Ok(new { code = 200 });
+
+            }
+            catch
+            {
+                return BadRequest(new { error = 412, message = "Operation failed" });
+            }
+        }
     }
 }

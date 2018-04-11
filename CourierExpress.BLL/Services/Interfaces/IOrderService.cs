@@ -16,5 +16,7 @@ namespace CourierExpress.BLL.Services.Interfaces
         void Accept(int orderId, int courierId);
 
         void Close(int orderId);
+
+        void Remove(int orderId);
     }
 }

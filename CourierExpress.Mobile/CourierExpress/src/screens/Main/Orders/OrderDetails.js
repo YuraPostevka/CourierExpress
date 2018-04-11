@@ -170,8 +170,8 @@ export class OrderDetails extends Component {
                                         color: "#fff",
                                         alignSelf: "center"
                                     }}>
-                                    Вперед!
-                                  </Text>
+                                    {this.state.orderDetails.id === this.props.account.id ? "Видалити" : "Вперед!"}
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -186,7 +186,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    orderDetails: state.orders.orderDetails
+    orderDetails: state.orders.orderDetails,
+    account: state.account
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetails);

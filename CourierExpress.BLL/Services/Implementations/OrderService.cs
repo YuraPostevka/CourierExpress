@@ -5,6 +5,7 @@ using CourierExpress.BLL.Services.Interfaces;
 using CourierExpress.DAL;
 using CourierExpress.Models.Constants;
 using CourierExpress.Models.Data;
+using CourierExpress.Models.Security;
 
 namespace CourierExpress.BLL.Services.Implementations
 {
@@ -33,7 +34,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 EndPoint = order.EndPoint,
                                 Weight = order.Weight,
                                 OwnerId = order.OwnerId,
-                                Coordinates=order.Coordinates,
+                                Coordinates = order.Coordinates,
                                 Owner = owner != null ? new Models.UserModel
                                 {
                                     Id = owner.Id,
@@ -78,7 +79,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 PhoneNumber = owner.PhoneNumber
                             } : null
                         };
-            var res =  query.FirstOrDefault(x => x.Id == id);
+            var res = query.FirstOrDefault(x => x.Id == id);
 
             return res;
         }
@@ -100,6 +101,12 @@ namespace CourierExpress.BLL.Services.Implementations
         public void Close(int orderId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Remove(int orderId)
+        {
+            _context.Users.Remove(new ApplicationUserModel { Id = orderId });
+            _context.SaveChanges();
         }
     }
 }
