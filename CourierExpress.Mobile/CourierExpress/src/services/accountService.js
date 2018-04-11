@@ -4,8 +4,8 @@ import {
 export default class AccountService {
 
     static login(number, password) {
-        // return fetch("http://courierexpressapp.azurewebsites.net/api/account/login",
-        return fetch("http://10.128.70.181:56096/api/account/login",
+        return fetch("http://courierexpressapp.azurewebsites.net/api/account/login",
+            // return fetch("http://10.128.70.181:56096/api/account/login",
             {
                 method: 'POST',
                 headers: {
@@ -29,8 +29,8 @@ export default class AccountService {
     }
 
     static register(name, number, password) {
-        // return fetch("http://courierexpressapp.azurewebsites.net/api/account/register",
-        return fetch("http://10.128.70.181:56096/api/account/register",
+        return fetch("http://courierexpressapp.azurewebsites.net/api/account/register",
+            // return fetch("http://10.128.70.181:56096/api/account/register",
             {
                 method: 'POST',
                 headers: {
