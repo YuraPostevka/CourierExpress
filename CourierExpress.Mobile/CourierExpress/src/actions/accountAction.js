@@ -18,7 +18,7 @@ export const login = (number, password) => {
             .then(response => {
                 if (response.error) {
                     dispatch(loginFailure());
-                    Alert.alert("Incorrect phone number or password!")
+                    Alert.alert("Incorrect phone number or password!");
                 }
                 else {
                     AsyncStorage.setItem("id", response.id);
@@ -26,6 +26,20 @@ export const login = (number, password) => {
                     AsyncStorage.setItem("userName", response.userName);
 
                     dispatch(loginSuccess(response));
+                }
+            });
+    };
+};
+
+export const register = (name, number, password, navigate) => {
+    return dispatch => {
+        return AccountService.register(name, number, password)
+            .then(response => {
+                if (response.error) {
+                    Alert.alert(response.message);
+                }
+                else {
+                    navigate("Login");
                 }
             });
     };

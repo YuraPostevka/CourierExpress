@@ -1,4 +1,5 @@
-﻿using CourierExpress.Models;
+﻿using System;
+using CourierExpress.Models;
 using CourierExpress.BLL.Services.Interfaces;
 using CourierExpress.DAL;
 using System.Linq;
@@ -17,9 +18,17 @@ namespace CourierExpress.BLL.Services.Implementations
 
         public void Add(ApplicationUserModel model)
         {
-            //if (model.PhoneNumber == null || model.Password == null) return;
-            //_context.Users.Add(model);
-            //_context.SaveChanges();
+            var existingUser = _context.Users.FirstOrDefault(x => x.PhoneNumber == model.PhoneNumber);
+            if (existingUser == null)
+            {
+                if (model.PhoneNumber == null || model.Password == null) return;
+                _context.Users.Add(model);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Номер вже використовується!");
+            }
         }
 
 

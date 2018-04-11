@@ -37,7 +37,15 @@ export class OrderDetails extends Component {
         if (nextProps.orderDetails !== null) {
             this.setState({
                 orderDetails: nextProps.orderDetails
+            }, () => {
+                let coords = JSON.parse(nextProps.orderDetails.coordinates);
+                // this.mapRef.fitToCoordinates(
+                //     [coords.startPoint, coords.endPoint],
+                //     false//not animated
+                // );
+                this.mapRef.fitToElements(true);
             });
+
         }
     }
 
@@ -52,8 +60,11 @@ export class OrderDetails extends Component {
                 {this.state.orderDetails !== null &&
                     <View>
                         <View style={{ margin: 10 }}>
-                            <Text style={{ fontSize: 20, color: "#fff", alignItems: 'center', }}>
+                            <Text style={{ fontSize: 20, color: "#fff", alignSelf: 'flex-start', position: "absolute" }}>
                                 {this.state.orderDetails.owner.name}
+                            </Text>
+                            <Text style={{ fontSize: 20, color: "#fff", alignSelf: 'flex-end' }}>
+                                {this.state.orderDetails.owner.phoneNumber}
                             </Text>
                         </View>
 
@@ -83,7 +94,7 @@ export class OrderDetails extends Component {
                                 }}>
                                     <WeightIcon style={{ marginRight: 10 }} name="weight-kilogram" size={30} color={"white"} />
                                     <Text style={styles.text}>
-                                        {this.state.orderDetails.weight}
+                                        {this.state.orderDetails.weight} грам
                                     </Text>
                                 </View>
 
@@ -95,7 +106,7 @@ export class OrderDetails extends Component {
                                 }}>
                                     <MoneyIcon style={{ marginRight: 10 }} name="money" size={35} color={"white"} />
                                     <Text style={{ color: "#fff", fontSize: 20 }}>
-                                        {this.state.orderDetails.price}uah
+                                        {this.state.orderDetails.price}грн
                                     </Text>
                                 </View>
 
@@ -113,8 +124,12 @@ export class OrderDetails extends Component {
                             <View>
                                 <MapView
                                     ref={(ref) => { this.mapRef = ref }}
-                                    mapType='standard'
+                                    mapType='terrain'
                                     style={styles.map}
+                                    onMapReady={() => {
+                                        this.mapRef.fitToElements(true)
+                                    }
+                                    }
                                     initialRegion={{
                                         latitude: 48.292079,
                                         longitude: 25.935837,
@@ -123,18 +138,10 @@ export class OrderDetails extends Component {
                                     }}
                                 >
                                     <Marker
-                                        // coordinate={{
-                                        //     latitude: 48.260229,
-                                        //     longitude: 25.954463
-                                        // }}
                                         coordinate={coords.startPoint !== null ? coords.startPoint : {}}
                                         title={this.state.orderDetails.startPoint}
                                     />
                                     <Marker
-                                        // coordinate={{
-                                        //     latitude: 48.288735,
-                                        //     longitude: 25.953587
-                                        // }}
                                         coordinate={coords.endPoint !== null ? coords.endPoint : {}}
                                         title={this.state.orderDetails.endPoint}
                                     />
@@ -151,10 +158,11 @@ export class OrderDetails extends Component {
                             </View>
                         </View>
 
-                        {/* "{"startPoint":{"latitude": 48.291771,"longitude": 25.934244},"endPoint":{"latitude": 48.27618,"longitude": 25.963001}}" */}
 
                         <View>
                             <TouchableOpacity
+                                onPress={() => {
+                                }}
                                 style={styles.go}>
                                 <Text
                                     style={{

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button, Keyboard } from 'react-native';
+import { connect } from "react-redux";
 
-export default class RegisterForm extends Component {
+import { register } from "../../actions/accountAction";
+
+export class RegisterForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,33 +17,16 @@ export default class RegisterForm extends Component {
     }
 
     onSubmit() {
-        fetch("http://courierexpressapp.azurewebsites.net/api/account/register",
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: this.state.name,
-                    phoneNumber: this.state.number,
-                    password: this.state.password,
-                }),
-            },
-        )
-            .then((response) => response)
-            .then(() => {
-                this.setState({
-                    number: "",
-                    password: "",
-                    name: ""
-                });
-                this.props.navigate("Login");
-            })
-            .catch((error) => {
-                Alert.alert("Something wrong!!!");
-                return Promise(error);
-            });
+        Keyboard.dismiss();
+        this.setState({
+            name: "",
+            number: "",
+            password: "",
+        });
+        this.props.register(this.state.name,
+            this.state.number,
+            this.state.password,
+            this.props.navigate);
     }
 
     render() {
@@ -88,6 +74,17 @@ export default class RegisterForm extends Component {
         );
     }
 }
+
+const mapDispatchToProps = dispatch => ({
+    register: (name, number, password, navigate) => dispatch(register(name, number, password, navigate)),
+});
+
+const mapStateToProps = state => ({
+    state
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+
 // define your styles
 const styles = StyleSheet.create({
     container: {

@@ -32,11 +32,11 @@ namespace CourierExpress.Controllers
             try
             {
                 _userService.Add(model);
-                return Ok();
+                return Ok(new { success = 1 });
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { error = 401, message = ex.Message });
             }
         }
 

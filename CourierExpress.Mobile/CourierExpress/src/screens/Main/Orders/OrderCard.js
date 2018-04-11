@@ -46,14 +46,14 @@ export default class Orderline extends Component {
                         <View style={styles.line}>
                             <MoneyIcon style={{ marginRight: 10 }} name="money" size={30} color={"white"} />
                             <Text style={styles.text}>
-                                Price - {order.price}
+                                Ціна - {order.price} грн
                             </Text>
                         </View>
 
                         <View style={styles.line}>
                             <WeightIcon style={{ marginRight: 10 }} name="weight-kilogram" size={30} color={"white"} />
                             <Text style={styles.text}>
-                                {order.weight}
+                                {order.weight} грам
                             </Text>
                         </View>
                     </View>
