@@ -10,8 +10,8 @@ export class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            number: 1,
-            password: 1,
+            number: "+380991122333",
+            password: "admin",
         };
 
         this.onSubmit = this.onSubmit.bind(this);
