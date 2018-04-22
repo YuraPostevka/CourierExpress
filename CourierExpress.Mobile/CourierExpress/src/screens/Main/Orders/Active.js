@@ -35,12 +35,12 @@ export class Active extends Component {
     }
 
     getCourierOrders() {
-        this.setActive(1);
-        // this.props.fetchCourierActive(this.props.account.id);
+        // this.setActive(1);
+        this.props.fetchCourierActive(this.props.account.id);
     }
 
     getOwnerOrders() {
-        this.setActive(2);
+        // this.setActive(2);
         this.props.fetchOwnerActive(this.props.account.id);
     }
 
@@ -129,16 +129,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    orderList: {
-        // flex: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center',
-    },
     courier: {
         flex: 1,
         width: "30%",
         height: 30,
-        // alignSelf: "center",
         borderWidth: 1,
         borderColor: "#fff",
         borderRadius: 4,
@@ -157,6 +151,5 @@ const styles = StyleSheet.create({
         margin: 5
     },
     activeButton: {
-        opacity: 0.1
     }
 });

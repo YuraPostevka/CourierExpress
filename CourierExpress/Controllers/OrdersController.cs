@@ -60,19 +60,19 @@ namespace CourierExpress.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("getCourierActive/{userId}")]
-        public IActionResult GetCourierActive(int userId)
-        {
-            try
-            {
-                return Json(_orderService.GetCourierActive(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { code = 500, message = ex.Message });
-            }
-        }
+        //[HttpGet]
+        //[Route("getCourierActive/{userId}")]
+        //public IActionResult GetCourierActive(int userId)
+        //{
+        //    try
+        //    {
+        //        return Json(_orderService.GetCourierActive(userId));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { code = 500, message = ex.Message });
+        //    }
+        //}
 
         [HttpGet]
         [Route("getOwnerActive/{userId}")]

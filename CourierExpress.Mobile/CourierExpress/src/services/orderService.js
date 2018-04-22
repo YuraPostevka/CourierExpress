@@ -104,6 +104,7 @@ export default class OrderService {
             )
                 .then(response => response.json())
                 .then(resp => {
+                    console.log(path);
                     return resp;
                 })
                 .catch((error) => {
