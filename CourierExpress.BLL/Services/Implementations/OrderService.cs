@@ -134,7 +134,6 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
-                        join courier in _context.Users on order.CourierId equals courier.Id
                         select new OrderModel
                         {
                             Id = order.Id,
@@ -146,19 +145,13 @@ namespace CourierExpress.BLL.Services.Implementations
                             Weight = order.Weight,
                             Coordinates = order.Coordinates,
                             OwnerId = order.OwnerId,
-                            Owner = owner != null ? new Models.UserModel
+                            CourierId = order.CourierId,
+                            Owner = new Models.UserModel
                             {
                                 Id = owner.Id,
                                 Name = owner.Name,
                                 PhoneNumber = owner.PhoneNumber
-                            } : null,
-                            CourierId = order.CourierId,
-                            Courier = courier != null ? new Models.UserModel
-                            {
-                                Id = courier.Id,
-                                Name = courier.Name,
-                                PhoneNumber = courier.PhoneNumber
-                            } : null
+                            }
                         };
             var res = query.Where(x => x.CourierId == userId && x.Status == OrderStatus.Accepted).ToList();
 
@@ -169,7 +162,6 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
-                        join courier in _context.Users on order.CourierId equals courier.Id
                         select new OrderModel
                         {
                             Id = order.Id,
@@ -186,16 +178,9 @@ namespace CourierExpress.BLL.Services.Implementations
                                 Id = owner.Id,
                                 Name = owner.Name,
                                 PhoneNumber = owner.PhoneNumber
-                            } : null,
-                            CourierId = order.CourierId,
-                            Courier = courier != null ? new Models.UserModel
-                            {
-                                Id = courier.Id,
-                                Name = courier.Name,
-                                PhoneNumber = courier.PhoneNumber
                             } : null
                         };
-            var res = query.Where(x => x.OwnerId == userId && x.Status != OrderStatus.Pending).ToList();
+            var res = query.Where(x => x.OwnerId == userId && x.Status == OrderStatus.Accepted).ToList();
 
             return res;
         }
