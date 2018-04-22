@@ -7,8 +7,8 @@ export default class OrderService {
     static getAll() {
         let token = store.getState().account.token;
         if (token !== null) {
-            // return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
-                return fetch("http://10.128.70.181:56096/api/orders/getAll",
+            return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
+                // return fetch("http://10.128.70.181:56096/api/orders/getAll",
 
                 {
                     method: 'GET',
@@ -35,8 +35,8 @@ export default class OrderService {
     static getOrderDetails(id) {
         let token = store.getState().account.token;
         if (token !== null) {
-            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/getById";
-            let path = "http://10.128.70.181:56096/api/orders/getById";
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/getById";
+            // let path = "http://10.128.70.181:56096/api/orders/getById";
 
             return fetch(`${path}/${id}`,
                 {
@@ -62,8 +62,8 @@ export default class OrderService {
     static getCourierActive(userId) {
         let token = store.getState().account.token;
         if (token !== null) {
-            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/getCourierActive";
-            let path = "http://10.128.70.181:56096/api/orders/getCourierActive";
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/getCourierActive";
+            // let path = "http://10.128.70.181:56096/api/orders/getCourierActive";
 
             return fetch(`${path}/${userId}`,
                 {
@@ -116,8 +116,8 @@ export default class OrderService {
     static accept(orderId, courierId) {
         let token = store.getState().account.token;
         if (token !== null) {
-            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/accept";
-            let path = "http://10.128.70.181:56096/api/orders/accept";
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/accept";
+            // let path = "http://10.128.70.181:56096/api/orders/accept";
 
             return fetch(`${path}/${orderId}/${courierId}`,
                 {
@@ -144,8 +144,8 @@ export default class OrderService {
     static close(orderId) {
         let token = store.getState().account.token;
         if (token !== null) {
-            // let path = "http://courierexpressapp.azurewebsites.net/api/orders/close";
-            let path = "http://10.128.70.181:56096/api/orders/close";
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/close";
+            // let path = "http://10.128.70.181:56096/api/orders/close";
 
             return fetch(`${path}/${orderId}`,
                 {
