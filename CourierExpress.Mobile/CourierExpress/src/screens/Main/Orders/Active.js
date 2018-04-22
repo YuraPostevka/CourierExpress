@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import MapView from 'react-native-maps';
-// import Marker from 'react-native-maps';
-
+import { fetchActiveOrders } from "../../../actions/ordersAction";
 import { connect } from "react-redux";
 
 export class Active extends Component {
@@ -20,39 +19,10 @@ export class Active extends Component {
             longitude: 0,
             error: null,
         };
-
-        this.onGetCurrentPosition = this.onGetCurrentPosition.bind(this);
     }
+
     componentDidMount() {
-        this.onGetCurrentPosition();
-    }
-
-    onGetCurrentPosition() {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    error: null,
-                });
-            },
-            (error) => this.setState({ error: error.message }),
-            {
-                enableHighAccuracy: true,
-                timeout: 10000,
-                maxAge: 0
-            }
-        );
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (!nextProps.account.isLoggedIn) {
-            nextProps.navigation.navigate("Login");
-        }
-    }
-
-    componentWillUnmount() {
-
+        this.props.fetchActiveOrders(this.props.account.id)
     }
 
     render() {
@@ -94,7 +64,11 @@ const mapStateToProps = state => ({
     account: state.account
 });
 
-export default connect(mapStateToProps)(Active);
+const mapDispatchToProps = dispatch => ({
+    fetchActiveOrders: (userId) => dispatch(fetchActiveOrders(userId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Active);
 
 // define your styles
 const styles = StyleSheet.create({

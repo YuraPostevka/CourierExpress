@@ -59,6 +59,33 @@ export default class OrderService {
         }
     }
 
+    static getActive(userId) {
+        let token = store.getState().account.token;
+        if (token !== null) {
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/getActive";
+            // let path = "http://10.128.70.181:56096/api/orders/getActive";
+
+            return fetch(`${path}/${userId}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
+                    }
+                },
+            )
+                .then(response => response.json())
+                .then(resp => {
+                    return resp;
+                })
+                .catch((error) => {
+                    Alert.alert("Error");
+                    return Promise(error.error);
+                });
+        }
+    }
+
     static accept(orderId, courierId) {
         let token = store.getState().account.token;
         if (token !== null) {

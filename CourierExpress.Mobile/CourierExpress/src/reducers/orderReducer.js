@@ -1,6 +1,7 @@
 let defaultState = {
     orders: [],
-    orderDetails: null
+    orderDetails: null,
+    activeOrders: [],
 };
 
 export default (state = defaultState, action) => {
@@ -19,6 +20,18 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 orderDetails: action.payload
+            }
+        }
+        case "ACTIVE_ORDERS_SUCCESS": {
+            return {
+                ...state,
+                activeOrders: action.payload
+            }
+        }
+        case "ACTIVE_ORDERS_FAILURE": {
+            return {
+                ...state,
+                activeOrders: { ...defaultState.activeOrders }
             }
         }
         case "ORDER_DETAILS_FAILURE": {

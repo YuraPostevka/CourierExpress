@@ -61,12 +61,12 @@ namespace CourierExpress.Controllers
         }
 
         [HttpGet]
-        [Route("getActive/{ownerId}")]
-        public IActionResult GetActive(int ownerId)
+        [Route("getActive/{userId}")]
+        public IActionResult GetActive(int userId)
         {
             try
             {
-                return Json(_orderService.GetActive(ownerId));
+                return Json(_orderService.GetActive(userId));
             }
             catch (Exception ex)
             {

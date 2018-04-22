@@ -13,6 +13,25 @@ export const fetchAllOrdersFailure = response => ({
     type: "ALL_ORDERS_FAILURE",
 });
 
+export const fetchOrderDetailsSuccess = response => ({
+    payload: response,
+    type: "ORDER_DETAILS_SUCCESS",
+});
+
+export const fetchOrderDetailsFailure = response => ({
+    type: "ORDER_DETAILS_FAILURE",
+});
+
+export const fetchActiveOrdersSuccess = response => ({
+    payload: response,
+    type: "ACTIVE_ORDERS_SUCCESS",
+});
+
+export const fetchActiveOrdersFailure = response => ({
+    payload: response,
+    type: "ACTIVE_ORDERS_FAILURE",
+});
+
 export const fetchAllOrders = () => {
     return dispatch => {
         return OrderService.getAll()
@@ -33,15 +52,6 @@ export const fetchAllOrders = () => {
     };
 };
 
-export const fetchOrderDetailsSuccess = response => ({
-    payload: response,
-    type: "ORDER_DETAILS_SUCCESS",
-});
-
-export const fetchOrderDetailsFailure = response => ({
-    type: "ORDER_DETAILS_FAILURE",
-});
-
 export const fetchOrderDetails = (id) => {
     return dispatch => {
         return OrderService.getOrderDetails(id)
@@ -52,6 +62,21 @@ export const fetchOrderDetails = (id) => {
                 }
                 else {
                     dispatch(fetchOrderDetailsSuccess(response));
+                }
+            });
+    };
+};
+
+export const fetchActiveOrders = (userId) => {
+    return dispatch => {
+        return OrderService.getActive(userId)
+            .then(response => {
+                if (response.code && reposnse.code !== 200) {
+                    dispatch(fetchActiveOrdersFailure());
+                    Alert.alert(response.message)
+                }
+                else {
+                    dispatch(fetchActiveOrdersSuccess(response));
                 }
             });
     };
