@@ -71,6 +71,7 @@ export const fetchCourierActive = (userId) => {
     return dispatch => {
         return OrderService.getCourierActive(userId)
             .then(response => {
+                console.log(response);
                 if (response.code && reposnse.code !== 200) {
                     dispatch(fetchActiveOrdersFailure());
                     Alert.alert(response.message)

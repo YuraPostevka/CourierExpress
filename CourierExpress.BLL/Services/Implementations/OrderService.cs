@@ -134,6 +134,7 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
+                        where order.CourierId == userId
                         select new OrderModel
                         {
                             Id = order.Id,
@@ -153,7 +154,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 PhoneNumber = owner.PhoneNumber
                             }
                         };
-            var res = query.Where(x => x.CourierId == userId && x.Status == OrderStatus.Accepted).ToList();
+            var res = query.Where(x => x.Status == OrderStatus.Accepted).ToList();
 
             return res;
         }
@@ -162,6 +163,7 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
+                        where order.OwnerId == userId
                         select new OrderModel
                         {
                             Id = order.Id,
@@ -180,7 +182,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 PhoneNumber = owner.PhoneNumber
                             } : null
                         };
-            var res = query.Where(x => x.OwnerId == userId && x.Status == OrderStatus.Accepted).ToList();
+            var res = query.Where(x => x.Status == OrderStatus.Accepted).ToList();
 
             return res;
         }
