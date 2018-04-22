@@ -10,6 +10,14 @@ import { fetchAllOrders } from "../../../actions/ordersAction";
 import OrderCard from "./OrderCard";
 
 export class AllOrders extends Component {
+
+    static navigationOptions = {
+        tabBarOnPress: (props) => {
+            let component = new AllOrders();
+            component.onTabPress(props);
+        }
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,13 +27,25 @@ export class AllOrders extends Component {
         };
         this.goToDetails = this.goToDetails.bind(this);
         this.add = this.add.bind(this);
+        this.onTabPress = this.onTabPress.bind(this);
+        this.getAll = this.getAll.bind(this);
+    }
 
+    onTabPress(props) {
+        if (props.scene.route.routeName === "AllOrders") {
+
+        }
+        props.jumpToIndex(props.scene.index);
     }
 
     onRefresh() {
         this.setState({ refreshing: true });
         this.props.fetchAllOrders();
         this.setState({ refreshing: false });
+    }
+
+    getAll() {
+        this.props.fetchAllOrders();
     }
 
     componentDidMount() {

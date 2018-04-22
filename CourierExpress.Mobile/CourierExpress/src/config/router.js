@@ -10,6 +10,7 @@ import Active from "../screens/Main/Orders/Active";
 import AllOrders from "../screens/Main/Orders/AllOrders";
 import OrderDetails from "../screens/Main/Orders/OrderDetails";
 import CreateOrder from "../screens/Main/Orders/CreateOrder";
+import From from "../screens/Main/Orders/From";
 import Settings from "../screens/Main/Settings/Settings";
 
 export const AuthRoot = StackNavigator({
@@ -79,6 +80,20 @@ export const AllOrdersStack = StackNavigator({
                 fontWeight: 'normal',
             },
         }
+    },
+    From: {
+        screen: From,
+        navigationOptions: {
+            tabBarVisible: false,
+            headerTintColor: '#fff',
+            headerFontSize: "5px",
+            headerStyle: {
+                backgroundColor: "#1A2C3E",
+            },
+            headerTitleStyle: {
+                fontWeight: 'normal',
+            },
+        }
     }
 },
     {
@@ -102,15 +117,6 @@ export const MainStack = TabNavigator({
         screen: AllOrdersStack,
 
     },
-    // CreateOrder: {
-    //     screen: CreateOrder,
-    //     navigationOptions: {
-    //         tabBarLabel: null,
-    //         tabBarIcon: () => {
-    //             return <IconIonicons name="ios-add-circle-outline" size={25} color={"white"} />;
-    //         }
-    //     }
-    // },
     Settings: {
         screen: Settings,
         navigationOptions: {
@@ -123,7 +129,6 @@ export const MainStack = TabNavigator({
 },
     {
         initialRouteName: "AllOrders",
-        tabBarPosition: "bottom",
         tabBarOptions: {
             showLabel: false,
             showIcon: true,

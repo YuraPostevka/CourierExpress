@@ -36,7 +36,12 @@ export class Root extends Component {
     render() {
         if (this.props.account.isLoggedIn) {
             return (
-                <MainRoot />
+                <MainRoot
+                    onNavigationStateChange={(prevState, currentState) => {
+                        console.log(prevState);
+                        console.log(currentState);
+                    }}
+                />
             );
         } else {
             return (

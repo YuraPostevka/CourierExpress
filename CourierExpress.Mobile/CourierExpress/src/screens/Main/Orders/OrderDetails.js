@@ -53,21 +53,20 @@ export class OrderDetails extends Component {
     }
 
     onPress() {
-        this.props.navigation.goBack();
-        // if (this.state.orderDetails.id === this.props.account.id) {
-        //     //delete
-        // }
-        // else {
-        //     OrderService.accept(this.state.orderDetails.id, this.props.account.id)
-        //         .then(res => {
-        //             if (res.code && res.code !== 200) {
-        //                 Alert.alert(res.message);
-        //             }
-        //             else {
-        //                 
-        //             }
-        //         });
-        // }
+        if (this.state.orderDetails.id === this.props.account.id) {
+            //delete
+        }
+        else {
+            OrderService.accept(this.state.orderDetails.id, this.props.account.id)
+                .then(res => {
+                    if (res.code && res.code !== 200) {
+                        Alert.alert(res.message);
+                    }
+                    else {
+                        this.props.navigation.goBack();
+                    }
+                });
+        }
     }
 
     render() {
@@ -190,7 +189,7 @@ export class OrderDetails extends Component {
                                         color: "#fff",
                                         alignSelf: "center"
                                     }}>
-                                    {this.state.orderDetails.id === this.props.account.id ? "Видалити" : "Вперед!"}
+                                    {this.state.orderDetails.owner.id === this.props.account.id ? "Видалити" : "Вперед!"}
                                 </Text>
                             </TouchableOpacity>
                         </View>

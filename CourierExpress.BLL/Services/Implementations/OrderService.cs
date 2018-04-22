@@ -119,5 +119,40 @@ namespace CourierExpress.BLL.Services.Implementations
             _context.Users.Remove(new ApplicationUserModel { Id = orderId });
             _context.SaveChanges();
         }
+
+        public OrderModel GetActive(int userId)
+        {
+            var query = from order in _context.Orders
+                        join owner in _context.Users on order.OwnerId equals owner.Id
+                        join courier in _context.Users on order.OwnerId equals courier.Id
+                        select new OrderModel
+                        {
+                            Id = order.Id,
+                            Description = order.Description,
+                            Price = order.Price,
+                            Status = order.Status,
+                            StartPoint = order.StartPoint,
+                            EndPoint = order.EndPoint,
+                            Weight = order.Weight,
+                            OwnerId = order.OwnerId,
+                            Coordinates = order.Coordinates,
+                            Owner = owner != null ? new Models.UserModel
+                            {
+                                Id = owner.Id,
+                                Name = owner.Name,
+                                PhoneNumber = owner.PhoneNumber
+                            } : null,
+                            CourierId = order.CourierId,
+                            Courier = courier != null ? new Models.UserModel
+                            {
+                                Id = courier.Id,
+                                Name = courier.Name,
+                                PhoneNumber = courier.PhoneNumber
+                            } : null
+                        };
+            var res = query.FirstOrDefault(x => x.OwnerId == userId || x.CourierId == userId && x.Status == OrderStatus.Pending);
+
+            return res;
+        }
     }
 }

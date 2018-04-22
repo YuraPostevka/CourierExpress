@@ -6,6 +6,13 @@ import MapView from 'react-native-maps';
 import { connect } from "react-redux";
 
 export class Active extends Component {
+
+    static navigationOptions = {
+        tabBarOnPress: (props) => {
+            props.jumpToIndex(props.scene.index);
+        },
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -54,7 +61,7 @@ export class Active extends Component {
                 <ScrollView>
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
-                            Мої замовлення
+                            Активні
                 </Text>
                     </View>
                     <Text>

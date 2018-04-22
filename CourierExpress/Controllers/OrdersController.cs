@@ -60,6 +60,20 @@ namespace CourierExpress.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getActive/{ownerId}")]
+        public IActionResult GetActive(int ownerId)
+        {
+            try
+            {
+                return Json(_orderService.GetActive(ownerId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { code = 500, message = ex.Message });
+            }
+        }
+
         [HttpPost]
         [Route("create")]
         public IActionResult Create([FromBody]OrderModel model)
@@ -78,7 +92,7 @@ namespace CourierExpress.Controllers
 
         [HttpPost]
         [Route("accept/{orderId}/{courierId}")]
-        public IActionResult Accept(int orderId,int courierId)
+        public IActionResult Accept(int orderId, int courierId)
         {
             try
             {
