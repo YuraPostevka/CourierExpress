@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 import { fetchActiveOrders } from "../../../actions/ordersAction";
 import { connect } from "react-redux";
@@ -32,27 +32,38 @@ export class Active extends Component {
                     <View style={styles.title}>
                         <Text style={{ fontSize: 30, color: "#fff" }}>
                             Активні
-                </Text>
+                        </Text>
                     </View>
-                    <Text>
-                        {this.state.error}
-                    </Text>
-
-                    <View style={styles.mapContainer}>
-                        {/* <MapView
-                            mapType='satellite'
-                            style={styles.map}
-                        >
-                            {this.state.error !== null &&
-                                <MapView.Marker
-                                    coordinate={{
-                                        latitude: this.state.latitude,
-                                        longitude: this.state.longitude,
-                                    }}
-                                    title={"title"}
-                                    description={"de"} />
-                            }
-                        </MapView> */}
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <TouchableOpacity
+                            onPress={this.add}
+                            style={[styles.courier, styles.activeButton]}>
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    color: "#fff",
+                                    alignSelf: "center"
+                                }}>
+                                Я кур'єр
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={this.add}
+                            style={styles.owner}>
+                            <Text
+                                style={{
+                                    fontSize: 20,
+                                    color: "#fff",
+                                    alignSelf: "center"
+                                }}>
+                                Я замовник
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </View>
@@ -80,12 +91,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    mapContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
+    courier: {
+        flex: 1,
+        width: "30%",
+        height: 30,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#BD3618",
+        margin: 5
     },
-    map: {
-        height: 300,
-        width: 300,
+    owner: {
+        flex: 1,
+        width: "30%",
+        height: 30,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#BD3618",
+        margin: 5
+    },
+    activeButton: {
+        opacity: 0.7
     }
 });

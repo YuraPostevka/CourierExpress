@@ -6,6 +6,7 @@ using CourierExpress.DAL;
 using CourierExpress.Models.Constants;
 using CourierExpress.Models.Data;
 using CourierExpress.Models.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourierExpress.BLL.Services.Implementations
 {
@@ -120,11 +121,11 @@ namespace CourierExpress.BLL.Services.Implementations
             _context.SaveChanges();
         }
 
-        public OrderModel GetActive(int userId)
+        public List<OrderModel> GetCourierActive(int userId)
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
-                        join courier in _context.Users on order.CourierId equals courier.Id
+                        join courier in _context.Users on order.OwnerId equals courier.Id
                         select new OrderModel
                         {
                             Id = order.Id,
@@ -134,8 +135,8 @@ namespace CourierExpress.BLL.Services.Implementations
                             StartPoint = order.StartPoint,
                             EndPoint = order.EndPoint,
                             Weight = order.Weight,
-                            OwnerId = order.OwnerId,
                             Coordinates = order.Coordinates,
+                            OwnerId = order.OwnerId,
                             Owner = owner != null ? new Models.UserModel
                             {
                                 Id = owner.Id,
@@ -150,7 +151,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                 PhoneNumber = courier.PhoneNumber
                             } : null
                         };
-            var res = query.FirstOrDefault(x => x.OwnerId == userId || x.CourierId == userId && x.Status == OrderStatus.Pending);
+            var res = query.Where(x => x.CourierId == userId && x.Status == OrderStatus.Accepted).ToList();
 
             return res;
         }
