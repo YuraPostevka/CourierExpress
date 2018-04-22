@@ -25,7 +25,7 @@ export class Active extends Component {
     }
 
     componentDidMount() {
-        this.getCourierOrders();
+        this.getOwnerOrders();
     }
 
     setActive(activeTab) {
@@ -36,12 +36,12 @@ export class Active extends Component {
 
     getCourierOrders() {
         this.setActive(1);
-        this.props.fetchCourierActive(this.props.account.id)
+        // this.props.fetchCourierActive(this.props.account.id);
     }
 
     getOwnerOrders() {
-        this.props.fetchOwnerActive(this.props.account.id)
         this.setActive(2);
+        this.props.fetchOwnerActive(this.props.account.id);
     }
 
     goToDetails(id) {

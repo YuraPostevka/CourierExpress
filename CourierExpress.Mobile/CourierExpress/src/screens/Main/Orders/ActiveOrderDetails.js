@@ -42,10 +42,6 @@ export class ActiveOrderDetails extends Component {
                 orderDetails: nextProps.orderDetails
             }, () => {
                 let coords = JSON.parse(nextProps.orderDetails.coordinates);
-                // this.mapRef.fitToCoordinates(
-                //     [coords.startPoint, coords.endPoint],
-                //     false//not animated
-                // );
                 this.mapRef.fitToElements(true);
             });
 

@@ -40,6 +40,10 @@ export default (state = defaultState, action) => {
                 orderDetails: { ...defaultState.orderDetails }
             }
         }
+        case "LOG_OUT":
+            return {
+                defaultState
+            };
         default:
             return state;
     }

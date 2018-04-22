@@ -80,7 +80,7 @@ namespace CourierExpress.Controllers
         {
             try
             {
-                return Json(_orderService.GetCourierActive(userId));
+                return Json(_orderService.GetOwnerActive(userId));
             }
             catch (Exception ex)
             {
