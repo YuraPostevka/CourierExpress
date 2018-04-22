@@ -13,6 +13,8 @@ namespace CourierExpress.BLL.Services.Interfaces
 
         List<OrderModel> GetCourierActive(int userId);
 
+        List<OrderModel> GetOwnerActive(int userId);
+
         void Add(OrderModel model);
 
         void Accept(int orderId, int courierId);

@@ -74,6 +74,20 @@ namespace CourierExpress.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("getOwnerActive/{userId}")]
+        public IActionResult GetOwnerActive(int userId)
+        {
+            try
+            {
+                return Json(_orderService.GetCourierActive(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { code = 500, message = ex.Message });
+            }
+        }
+
         [HttpPost]
         [Route("create")]
         public IActionResult Create([FromBody]OrderModel model)

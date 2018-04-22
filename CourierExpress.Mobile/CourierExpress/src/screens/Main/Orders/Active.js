@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { fetchCourierActive } from "../../../actions/ordersAction";
+import { fetchCourierActive, fetchOwnerActive } from "../../../actions/ordersAction";
 import { connect } from "react-redux";
 import OrderCard from "./OrderCard";
 
@@ -40,6 +40,7 @@ export class Active extends Component {
     }
 
     getOwnerOrders() {
+        this.props.fetchOwnerActive(this.props.account.id)
         this.setActive(2);
     }
 
@@ -113,6 +114,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchCourierActive: (userId) => dispatch(fetchCourierActive(userId)),
+    fetchOwnerActive: (userId) => dispatch(fetchOwnerActive(userId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Active);

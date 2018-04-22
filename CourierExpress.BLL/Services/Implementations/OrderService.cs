@@ -164,5 +164,40 @@ namespace CourierExpress.BLL.Services.Implementations
 
             return res;
         }
+
+        public List<OrderModel> GetOwnerActive(int userId)
+        {
+            var query = from order in _context.Orders
+                        join owner in _context.Users on order.OwnerId equals owner.Id
+                        join courier in _context.Users on order.CourierId equals courier.Id
+                        select new OrderModel
+                        {
+                            Id = order.Id,
+                            Description = order.Description,
+                            Price = order.Price,
+                            Status = order.Status,
+                            StartPoint = order.StartPoint,
+                            EndPoint = order.EndPoint,
+                            Weight = order.Weight,
+                            Coordinates = order.Coordinates,
+                            OwnerId = order.OwnerId,
+                            Owner = owner != null ? new Models.UserModel
+                            {
+                                Id = owner.Id,
+                                Name = owner.Name,
+                                PhoneNumber = owner.PhoneNumber
+                            } : null,
+                            CourierId = order.CourierId,
+                            Courier = courier != null ? new Models.UserModel
+                            {
+                                Id = courier.Id,
+                                Name = courier.Name,
+                                PhoneNumber = courier.PhoneNumber
+                            } : null
+                        };
+            var res = query.Where(x => x.OwnerId == userId && x.Status != OrderStatus.Pending).ToList();
+
+            return res;
+        }
     }
 }

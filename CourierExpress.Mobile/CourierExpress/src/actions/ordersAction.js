@@ -81,3 +81,18 @@ export const fetchCourierActive = (userId) => {
             });
     };
 };
+
+export const fetchOwnerActive = (userId) => {
+    return dispatch => {
+        return OrderService.getOwnerActive(userId)
+            .then(response => {
+                if (response.code && reposnse.code !== 200) {
+                    dispatch(fetchActiveOrdersFailure());
+                    Alert.alert(response.message)
+                }
+                else {
+                    dispatch(fetchActiveOrdersSuccess(response));
+                }
+            });
+    };
+};
