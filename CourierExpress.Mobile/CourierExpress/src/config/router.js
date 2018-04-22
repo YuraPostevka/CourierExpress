@@ -9,6 +9,7 @@ import Main from "../screens/Main/Main";
 import Active from "../screens/Main/Orders/Active";
 import AllOrders from "../screens/Main/Orders/AllOrders";
 import OrderDetails from "../screens/Main/Orders/OrderDetails";
+import ActiveOrderDetails from "../screens/Main/Orders/ActiveOrderDetails";
 import CreateOrder from "../screens/Main/Orders/CreateOrder";
 import From from "../screens/Main/Orders/From";
 import Settings from "../screens/Main/Settings/Settings";
@@ -103,15 +104,42 @@ export const AllOrdersStack = StackNavigator({
     }
 );
 
-export const MainStack = TabNavigator({
+export const ActiveOrdersStack = StackNavigator({
     Active: {
         screen: Active,
         navigationOptions: {
-            tabBarLabel: null,
+            header: null,
             tabBarIcon: () => {
                 return <IconIonicons name="ios-walk-outline" size={25} color={"white"} />;
             }
         }
+    },
+    ActiveOrderDetails: {
+        screen: ActiveOrderDetails,
+        navigationOptions: {
+            tabBarVisible: false,
+            headerTitle: "Деталі",
+            headerTintColor: '#fff',
+            headerFontSize: "5px",
+            headerStyle: {
+                backgroundColor: "#1A2C3E",
+            },
+            headerTitleStyle: {
+                fontWeight: 'normal',
+            },
+        },
+    }
+},
+    {
+        mode: 'card',
+        headerMode: 'screen',
+        initialRouteName: "Active",
+    }
+);
+
+export const MainStack = TabNavigator({
+    Active: {
+        screen: ActiveOrdersStack
     },
     AllOrders: {
         screen: AllOrdersStack,

@@ -59,10 +59,37 @@ export default class OrderService {
         }
     }
 
-    static getActive(userId) {
+    static getCourierActive(userId) {
         let token = store.getState().account.token;
         if (token !== null) {
             let path = "http://courierexpressapp.azurewebsites.net/api/orders/getCourierActive";
+            // let path = "http://10.128.70.181:56096/api/orders/getCourierActive";
+
+            return fetch(`${path}/${userId}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
+                    }
+                },
+            )
+                .then(response => response.json())
+                .then(resp => {
+                    return resp;
+                })
+                .catch((error) => {
+                    Alert.alert("Error");
+                    return Promise(error.error);
+                });
+        }
+    }
+
+    static getOwnerActive(userId) {
+        let token = store.getState().account.token;
+        if (token !== null) {
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/getOwnerActive";
             // let path = "http://10.128.70.181:56096/api/orders/getCourierActive";
 
             return fetch(`${path}/${userId}`,
@@ -98,6 +125,39 @@ export default class OrderService {
             };
 
             return fetch(`${path}/${orderId}/${courierId}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Accept": 'application/json',
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    body: null
+                },
+            )
+                .then(response => response.json())
+                .then(resp => {
+                    return resp;
+                })
+                .catch((error) => {
+                    Alert.alert(error.error);
+                    return Promise(error.error);
+                });
+        }
+    }
+
+    static close(orderId) {
+        let token = store.getState().account.token;
+        if (token !== null) {
+            let path = "http://courierexpressapp.azurewebsites.net/api/orders/close";
+            // let path = "http://10.128.70.181:56096/api/orders/close";
+
+            let data = {
+                orderId: orderId,
+                courierId: courierId
+            };
+
+            return fetch(`${path}/${orderId}`,
                 {
                     method: 'POST',
                     headers: {

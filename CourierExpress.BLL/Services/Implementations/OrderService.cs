@@ -112,7 +112,16 @@ namespace CourierExpress.BLL.Services.Implementations
 
         public void Close(int orderId)
         {
-            throw new System.NotImplementedException();
+            var order = _context.Orders.FirstOrDefault(x => x.Id == orderId);
+            if (order != null)
+            {
+                order.Status = OrderStatus.Closed;
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Щось пішло не так :(((");
+            }
         }
 
         public void Remove(int orderId)

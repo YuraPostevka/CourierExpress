@@ -96,7 +96,23 @@ namespace CourierExpress.Controllers
         {
             try
             {
-                _orderService.Accept(orderId, 3);
+                _orderService.Accept(orderId, courierId);
+                return Ok(new { code = 200 });
+
+            }
+            catch
+            {
+                return BadRequest(new { code = 500, message = "Operation failed" });
+            }
+        }
+
+        [HttpPost]
+        [Route("close/{orderId}")]
+        public IActionResult Close(int orderId)
+        {
+            try
+            {
+                _orderService.Close(orderId);
                 return Ok(new { code = 200 });
 
             }

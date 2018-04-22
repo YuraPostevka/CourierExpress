@@ -67,9 +67,9 @@ export const fetchOrderDetails = (id) => {
     };
 };
 
-export const fetchActiveOrders = (userId) => {
+export const fetchCourierActive = (userId) => {
     return dispatch => {
-        return OrderService.getActive(userId)
+        return OrderService.getCourierActive(userId)
             .then(response => {
                 if (response.code && reposnse.code !== 200) {
                     dispatch(fetchActiveOrdersFailure());
