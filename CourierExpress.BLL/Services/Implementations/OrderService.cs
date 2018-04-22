@@ -125,7 +125,7 @@ namespace CourierExpress.BLL.Services.Implementations
         {
             var query = from order in _context.Orders
                         join owner in _context.Users on order.OwnerId equals owner.Id
-                        join courier in _context.Users on order.OwnerId equals courier.Id
+                        join courier in _context.Users on order.CourierId equals courier.Id
                         select new OrderModel
                         {
                             Id = order.Id,
