@@ -53,20 +53,15 @@ export class ActiveOrderDetails extends Component {
     }
 
     onPress() {
-        if (this.state.orderDetails.id === this.props.account.id) {
-            //delete
-        }
-        else {
-            OrderService.close(this.state.orderDetails.id)
-                .then(res => {
-                    if (res.code && res.code !== 200) {
-                        Alert.alert(res.message);
-                    }
-                    else {
-                        this.props.navigation.goBack();
-                    }
-                });
-        }
+        OrderService.close(this.state.orderDetails.id)
+            .then(res => {
+                if (res.code && res.code !== 200) {
+                    Alert.alert(res.message);
+                }
+                else {
+                    this.props.navigation.goBack();
+                }
+            });
     }
 
     render() {
