@@ -20,7 +20,6 @@ export default class CreateOrder extends Component {
             endPoint: "Руська 100",
             price: "",
             weight: "",
-            time: ""
         };
         this.add = this.add.bind(this);
     }
@@ -47,12 +46,14 @@ export default class CreateOrder extends Component {
             .then(resp => {
                 if (resp.code && resp.code === 200) {
                     store.dispatch(fetchAllOrders());
+                    this.props.navigation.goBack();
                 }
-            })
+            });
     }
 
     render() {
         const { navigate } = this.props.navigation;
+        const disabled = this.state.description === "" || this.state.price === "" || this.state.weight === "";
         return (
             <View style={styles.container}>
 
@@ -75,7 +76,7 @@ export default class CreateOrder extends Component {
                     placeholder='Звідки'
                     maxLength={20}
                     placeholderTextColor='rgba(225,225,225,0.7)'
-                    onChangeText={(startPoint) => this.setState({ startPoint })}
+                    // onChangeText={(startPoint) => this.setState({ startPoint })}
                     value={this.state.startPoint}
                 />
                 <TextInput style={styles.field}
@@ -86,13 +87,13 @@ export default class CreateOrder extends Component {
                     placeholder='Куди'
                     maxLength={20}
                     placeholderTextColor='rgba(225,225,225,0.7)'
-                    onChangeText={(endPoint) => this.setState({ endPoint })}
+                    // onChangeText={(endPoint) => this.setState({ endPoint })}
                     value={this.state.endPoint}
                 />
                 <TextInput style={styles.field}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    keyboardType='default'
+                    keyboardType='numberic'
                     returnKeyType="next"
                     placeholder='Ціна'
                     maxLength={20}
@@ -103,7 +104,7 @@ export default class CreateOrder extends Component {
                 <TextInput style={styles.field}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    keyboardType='default'
+                    keyboardType='numeric'
                     returnKeyType="next"
                     placeholder='Вага'
                     maxLength={20}
@@ -111,20 +112,10 @@ export default class CreateOrder extends Component {
                     onChangeText={(weight) => this.setState({ weight })}
                     value={this.state.weight}
                 />
-                <TextInput style={styles.field}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    keyboardType='default'
-                    returnKeyType="next"
-                    placeholder='Час'
-                    maxLength={20}
-                    placeholderTextColor='rgba(225,225,225,0.7)'
-                    onChangeText={(time) => this.setState({ time })}
-                    value={this.state.time}
-                />
                 <View>
                     <TouchableOpacity
                         onPress={this.add}
+                        disabled={disabled}
                         style={styles.add}>
                         <Text
                             style={{
@@ -168,5 +159,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         backgroundColor: "#BD3618",
         margin: 20
+    },
+    addDisabled: {
+        opacity: 0.5
     }
 });

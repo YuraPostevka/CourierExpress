@@ -9,8 +9,10 @@ import WeightIcon from "../../../../node_modules/react-native-vector-icons/Mater
 import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
-import { fetchOrderDetails } from "../../../actions/ordersAction";
+import { fetchOrderDetails, fetchAllOrders } from "../../../actions/ordersAction";
 import OrderService from "../../../services/orderService";
+
+import store from "../../../store";
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -53,8 +55,17 @@ export class OrderDetails extends Component {
     }
 
     onPress() {
-        if (this.state.orderDetails.id === this.props.account.id) {
-            //delete
+        if (this.state.orderDetails.ownerId === this.props.account.id) {
+            OrderService.close(this.state.orderDetails.id)
+                .then(res => {
+                    if (res.code && res.code !== 200) {
+                        Alert.alert(res.message);
+                    }
+                    else {
+                        store.dispatch(fetchAllOrders());
+                        this.props.navigation.goBack();
+                    }
+                });
         }
         else {
             OrderService.accept(this.state.orderDetails.id, this.props.account.id)
@@ -63,6 +74,7 @@ export class OrderDetails extends Component {
                         Alert.alert(res.message);
                     }
                     else {
+                        store.dispatch(fetchAllOrders());
                         this.props.navigation.goBack();
                     }
                 });
