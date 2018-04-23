@@ -8,13 +8,14 @@ import { List, ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { fetchAllOrders } from "../../../actions/ordersAction";
 import OrderCard from "./OrderCard";
+import store from "../../../store";
 
 export class AllOrders extends Component {
 
     static navigationOptions = {
         tabBarOnPress: (props) => {
-            let component = new AllOrders();
-            component.onTabPress(props);
+            store.dispatch(fetchAllOrders());
+            props.jumpToIndex(props.scene.index);
         }
     };
 
@@ -33,7 +34,7 @@ export class AllOrders extends Component {
 
     onTabPress(props) {
         if (props.scene.route.routeName === "AllOrders") {
-
+            this;
         }
         props.jumpToIndex(props.scene.index);
     }
@@ -68,7 +69,7 @@ export class AllOrders extends Component {
     }
 
     add() {
-        this.props.navigation.navigate("CreateOrder");
+        this.props.navigation.navigate("CreateOrder", { ownerId: this.props.account.id });
     }
 
     render() {
@@ -119,7 +120,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    orders: state.orders.orders
+    orders: state.orders.orders,
+    account: state.account
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllOrders);

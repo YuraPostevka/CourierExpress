@@ -186,9 +186,13 @@ export class ActiveOrderDetails extends Component {
                                 </TouchableOpacity>
                             }
                             {this.state.orderDetails.ownerId === this.props.account.id &&
-                                <Text>
-                                    AIzaSyDkbm
-                                    </Text>
+                                <Text style={{
+                                    fontSize: 30,
+                                    color: "#fff",
+                                    alignSelf: "center"
+                                }}>
+                                    Виконується...
+                                </Text>
                             }
                         </View>
                     </View>

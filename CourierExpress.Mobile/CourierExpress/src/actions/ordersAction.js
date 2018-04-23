@@ -32,6 +32,10 @@ export const fetchActiveOrdersFailure = response => ({
     type: "ACTIVE_ORDERS_FAILURE",
 });
 
+export const addOrder = response => ({
+    type: "ADD_ORDER"
+});
+
 export const fetchAllOrders = () => {
     return dispatch => {
         return OrderService.getAll()
@@ -49,6 +53,21 @@ export const fetchAllOrders = () => {
                 }
             });
 
+    };
+};
+
+export const add = (order) => {
+    return dispatch => {
+        return OrderService.add(order)
+            .then(response => {
+                if (response.code && response.code !== 200) {
+                    Alert.alert(response.message);
+                }
+                else {
+                    this.fetchAllOrders();
+                    dispatch(addOrder(response));
+                }
+            });
     };
 };
 

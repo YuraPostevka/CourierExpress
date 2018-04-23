@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableWithoutFeedback, TouchableOpacity, FlatList, Button } from 'react-native';
 import { fetchCourierActive, fetchOwnerActive } from "../../../actions/ordersAction";
 import { connect } from "react-redux";
 import OrderCard from "./OrderCard";
+import store from "../../../store";
 
 export class Active extends Component {
 
     static navigationOptions = {
         tabBarOnPress: (props) => {
+            store;
             props.jumpToIndex(props.scene.index);
         },
     };
@@ -25,7 +27,7 @@ export class Active extends Component {
     }
 
     componentDidMount() {
-        this.getOwnerOrders();
+        this.getCourierOrders();
     }
 
     setActive(activeTab) {
@@ -35,12 +37,12 @@ export class Active extends Component {
     }
 
     getCourierOrders() {
-        // this.setActive(1);
+        this.setActive(1);
         this.props.fetchCourierActive(this.props.account.id);
     }
 
     getOwnerOrders() {
-        // this.setActive(2);
+        this.setActive(2);
         this.props.fetchOwnerActive(this.props.account.id);
     }
 
@@ -64,6 +66,7 @@ export class Active extends Component {
                     justifyContent: 'center',
                 }}>
                     <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={this.getCourierOrders}
                         style={[styles.courier, this.state.activeTab === 1 ? styles.activeButton : {}]}>
                         <Text
@@ -76,6 +79,7 @@ export class Active extends Component {
                             </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                        activeOpacity={0.7}
                         onPress={this.getOwnerOrders}
                         style={[styles.owner, this.state.activeTab === 2 ? styles.activeButton : {}]}>
                         <Text
@@ -88,15 +92,16 @@ export class Active extends Component {
                             </Text>
                     </TouchableOpacity>
                 </View>
+
                 <ScrollView>
                     <FlatList
                         data={this.props.activeOrders}
                         renderItem={({ item }) => (
                             < TouchableOpacity
-                                activeOpacity={0.9}
+                                activeOpacity={0.7}
                                 onPress={() => this.goToDetails(item.id)}
                             >
-                                <OrderCard order={item} />
+                                <OrderCard order={item} ownerOrder={this.props.account.id === item.ownerId} />
                             </TouchableOpacity>
                         )}
                         keyExtractor={item => item.id}
@@ -135,21 +140,29 @@ const styles = StyleSheet.create({
         height: 30,
         borderWidth: 1,
         borderColor: "#fff",
-        borderRadius: 4,
+        borderRightWidth: 0,
+        borderTopLeftRadius: 4,
+        borderBottomLeftRadius: 4,
         backgroundColor: "#1A2C3E",
-        margin: 5
+        margin: 5,
+        marginRight: 0
     },
     owner: {
         flex: 1,
         width: "30%",
         height: 30,
-        // alignSelf: "center",
         borderWidth: 1,
         borderColor: "#fff",
-        borderRadius: 4,
+        borderLeftWidth: 0,
+
+        borderTopRightRadius: 4,
+        borderBottomRightRadius: 4,
+
         backgroundColor: "#1A2C3E",
-        margin: 5
+        margin: 5,
+        marginLeft: 0
     },
     activeButton: {
+        backgroundColor: "#BD3618",
     }
 });

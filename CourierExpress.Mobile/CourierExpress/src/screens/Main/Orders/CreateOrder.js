@@ -5,6 +5,9 @@ import {
 } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import PlacesAutoComplete from "./PlacesAutoComplete";
+import OrderService from "../../../services/orderService";
+import store from "../../../store";
+import { fetchAllOrders } from "../../../actions/ordersAction";
 
 var width = Dimensions.get('window').width;
 
@@ -12,39 +15,41 @@ export default class CreateOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latitude: null,
-            longitude: null,
-            error: null,
-            name: "",
             description: "",
-            from: "",
-            to: "",
+            startPoint: "Головна  240",
+            endPoint: "Руська 100",
             price: "",
             weight: "",
             time: ""
         };
-
-        this.onGetCurrentPosition = this.onGetCurrentPosition.bind(this);
+        this.add = this.add.bind(this);
     }
 
-    onGetCurrentPosition() {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    error: null,
-                });
-            },
-            (error) => this.setState({ error: error.message }),
-            {
-                enableHighAccuracy: true,
-                timeout: 10000,
-                maxAge: 0
-            }
-        );
-    }
+    add() {
+        const { description, startPoint, endPoint, price, weight } = this.state;
+        const { ownerId } = this.props.navigation.state.params;
 
+        const coordinates = {
+            "startPoint": { "latitude": 48.260229, "longitude": 25.954463 },
+            "endPoint": { "latitude": 48.288735, "longitude": 25.953587 }
+        };
+        let order = {
+            ownerId,
+            description,
+            startPoint,
+            endPoint,
+            price,
+            weight,
+            coordinates: JSON.stringify(coordinates)
+        };
+
+        OrderService.add(order)
+            .then(resp => {
+                if (resp.code && resp.code === 200) {
+                    store.dispatch(fetchAllOrders());
+                }
+            })
+    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -62,33 +67,74 @@ export default class CreateOrder extends Component {
                     onChangeText={(description) => this.setState({ description })}
                     value={this.state.description}
                 />
-
-
                 <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
                     placeholder='Звідки'
+                    maxLength={20}
                     placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(startPoint) => this.setState({ startPoint })}
+                    value={this.state.startPoint}
                 />
-
-                {/* <PlacesAutoComplete
-                    placeholder="Звідки"
+                <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
+                    placeholder='Куди'
+                    maxLength={20}
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(endPoint) => this.setState({ endPoint })}
+                    value={this.state.endPoint}
                 />
-                <PlacesAutoComplete
-                    placeholder="Куди"
-                /> */}
-                <View style={{
-                    position: "absolute",
-                    bottom: 0,
-                    width: width
-                }}>
-                    <Button
-                        style={{
-                            position: 'absolute',
-                            bottom: 0,
-                        }}
-                        onPress={this.onSubmit}
-                        title="Сворити"
-                        color="#2980b6"
-                    />
+                <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
+                    placeholder='Ціна'
+                    maxLength={20}
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(price) => this.setState({ price })}
+                    value={this.state.price}
+                />
+                <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
+                    placeholder='Вага'
+                    maxLength={20}
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(weight) => this.setState({ weight })}
+                    value={this.state.weight}
+                />
+                <TextInput style={styles.field}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType='default'
+                    returnKeyType="next"
+                    placeholder='Час'
+                    maxLength={20}
+                    placeholderTextColor='rgba(225,225,225,0.7)'
+                    onChangeText={(time) => this.setState({ time })}
+                    value={this.state.time}
+                />
+                <View>
+                    <TouchableOpacity
+                        onPress={this.add}
+                        style={styles.add}>
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                color: "#fff",
+                                alignSelf: "center"
+                            }}>
+                            Створити
+                            </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -112,5 +158,15 @@ const styles = StyleSheet.create({
         borderBottomColor: "#fff",
         padding: 16,
         paddingBottom: 2
+    },
+    add: {
+        width: "30%",
+        height: 30,
+        alignSelf: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        borderRadius: 4,
+        backgroundColor: "#BD3618",
+        margin: 20
     }
 });

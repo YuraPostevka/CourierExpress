@@ -44,7 +44,7 @@ namespace CourierExpress.BLL.Services.Implementations
                                     PhoneNumber = owner.PhoneNumber
                                 } : null
                             };
-                var orders = query.ToList();
+                var orders = query.OrderByDescending(x => x.Id).ToList();
                 return orders;
             }
             catch (Exception ex)

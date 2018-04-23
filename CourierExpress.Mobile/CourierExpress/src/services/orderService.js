@@ -7,8 +7,8 @@ export default class OrderService {
     static getAll() {
         let token = store.getState().account.token;
         if (token !== null) {
-            return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
-                // return fetch("http://10.128.70.181:56096/api/orders/getAll",
+            // return fetch("http://courierexpressapp.azurewebsites.net/api/orders/getAll",
+            return fetch("http://10.128.70.181:56096/api/orders/getAll",
 
                 {
                     method: 'GET',
@@ -32,6 +32,33 @@ export default class OrderService {
             return Promise.reject("Error");
         }
     }
+
+    static add(order) {
+        let token = store.getState().account.token;
+        if (token !== null) {
+            // return fetch("http://courierexpressapp.azurewebsites.net/api/orders/create",
+            return fetch("http://10.128.70.181:56096/api/orders/create",
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(order),
+                },
+            )
+                .then(response => response.json())
+                .then(resp => {
+                    return resp;
+                })
+                .catch((error) => {
+                    Alert.alert("error");
+                    return Promise(error.error);
+                });
+        }
+    }
+
     static getOrderDetails(id) {
         let token = store.getState().account.token;
         if (token !== null) {
